@@ -2,16 +2,8 @@ import {createStore, applyMiddleware, combineReducers, compose} from "redux"
 import thunk from "redux-thunk";
 import inputFieldReducer from './update_search.js'
 import submissionReducer from './search_bar_submission.js'
-/* 
-Import all of your reducer functions here for example:
 
-    import countReducer from "./count"
-    import favoriteThingsReducer from "./favoriteThings"
-    import youTubeVideoReducer from "./youTubeVideo"
-
-*/
-
-
+//Make some good key names for your reducers
 const rootReducer = combineReducers({
   inputFieldReducer,
   submissionReducer
