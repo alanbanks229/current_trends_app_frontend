@@ -5,8 +5,8 @@ import submissionReducer from './search_bar_submission.js'
 
 //Make some good key names for your reducers
 const rootReducer = combineReducers({
-  inputFieldReducer,
-  submissionReducer
+  input_field: inputFieldReducer,
+  submitted: submissionReducer
   // count: countReducer,
   // favoriteTHings: favoriteThingsReducer,
   // youTubeVideo: youTubeVideoReducer
