@@ -1,3 +1,5 @@
+// THE STORE
+
 import {createStore, applyMiddleware, combineReducers, compose} from "redux"
 import thunk from "redux-thunk";
 import inputFieldReducer from './update_search.js'

@@ -58,8 +58,34 @@ const countryOptions = [
   { key: 've', value: 've', text: 'Venuzuela' },
 ]
 
-const SelectCountry = () => (
-  <Dropdown selected={'us'} placeholder='Select Country' options={countryOptions} search selection/>
-)
+class SelectCountry extends React.Component {
+
+  constructor(){
+    super()
+    this.state ={
+      countryName: 'United States',
+      countryCode: 'us'
+    }
+  }
+
+  onInputChange(event, countries) {
+    
+    let match = countries.filter( obj => obj.text === (event.target.textContent || event.target.value) )
+    let callBackCountryCode = match[0].value
+    this.setState({
+      countryName: match[0].text,
+      countryCode: match[0].value
+    })
+    this.props.countrySet(callBackCountryCode)
+  }
+
+  render() {
+    return (
+      <Dropdown onChange={(event) => this.onInputChange(event, countryOptions)} placeholder='Select Country' options={countryOptions} search selection/>
+    )
+  }
+}
+  
+
 
 export default SelectCountry
