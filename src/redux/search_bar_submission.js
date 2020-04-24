@@ -1,7 +1,6 @@
 //I think this action should take in the filters as well as the input
 export function input_submission_action(event, data_from_search) {
     event.preventDefault()
-    debugger
     return {
       type: "SUBMIT_QUERY",
       payload: data_from_search

@@ -1,6 +1,7 @@
 import React from 'react'
 import './NewsCard.css'
 import '../containers/NewsContainer.css'
+import missing_img from './no-image-available-grid.png';
 function News_Card(props){
 
 
@@ -11,7 +12,8 @@ function News_Card(props){
                 <h4 className="card-header-title">{props.source}</h4>
                 <a href={props.url} target="_blank" rel="noopener noreferrer">Link Source</a>
             </header>
-            <img src={props.image} className="img-responsive"/>
+            {props.image ? <img src={props.image} className="img-responsive"/> : <img src={missing_img} className="img-responsive"/>}
+            
             <br></br>
             <div className="img_caption">
                 {props.author ? <p className="author">By: {props.author}</p>: <p>provided by {props.source}</p>}

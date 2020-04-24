@@ -77,7 +77,6 @@ const NewsContainer = ({search_submitted}) => {
                         image={article.urlToImage}
                         published={article.publishedAt}
                         content={article.content}
-                        key={i}
                         />
                     )
                 )}

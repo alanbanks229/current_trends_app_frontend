@@ -69,8 +69,13 @@ class SelectCountry extends React.Component {
   }
 
   onInputChange(event, countries) {
-    
-    let match = countries.filter( obj => obj.text === (event.target.textContent || event.target.value) )
+    var match;
+    if (event.target.textContent){
+      match = countries.filter( country_obj => country_obj.text === (event.target.textContent))
+    } else {
+      match = countries.filter( country_obj => country_obj.text.includes(event.target.value))
+    }
+    debugger
     let callBackCountryCode = match[0].value
     this.setState({
       countryName: match[0].text,
