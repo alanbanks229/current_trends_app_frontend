@@ -4,14 +4,13 @@ import {createStore, applyMiddleware, combineReducers, compose} from "redux"
 import thunk from "redux-thunk";
 import inputFieldReducer from './update_search.js'
 import submissionReducer from './search_bar_submission.js'
+import geolocationReducer from './Geolocation.js'
 
 //Make some good key names for your reducers
 const rootReducer = combineReducers({
   input_field: inputFieldReducer,
-  submitted: submissionReducer
-  // count: countReducer,
-  // favoriteTHings: favoriteThingsReducer,
-  // youTubeVideo: youTubeVideoReducer
+  submitted: submissionReducer,
+  location: geolocationReducer
 })
 
 

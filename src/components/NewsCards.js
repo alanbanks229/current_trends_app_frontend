@@ -4,6 +4,23 @@ import '../containers/NewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 function News_Card(props){
 
+    //goal is to create NEW fetch request to bookmarks
+    //Bookmark will have a user_id and card_info
+    function createBookMark() {
+        let payload = {
+            user_id: "session_id or somethin",
+            article_data: props.article
+        }
+        debugger
+        fetch('localhost:3000/bookmarks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+        
+    }
 
 
     return(
@@ -25,7 +42,7 @@ function News_Card(props){
                 <br></br>
             </div>
             <div className="button">
-                <button className="news_card_button">Favorite</button>
+                <button onClick={createBookMark} data-card-id={props.card_id} className="news_card_button">bookmark</button>
             </div>
         </div>
     )

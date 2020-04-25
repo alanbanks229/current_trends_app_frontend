@@ -14,6 +14,9 @@ const ControlledForm = () => {
     const [ inputfield, inputFieldSet ] = useState(currentSearch)
     const [ endpoint, endpointSet ] = useState('top-headlines')
     const [ country, countrySet ] = useState('us')
+
+
+
     console.log("current country code is", country)
     // const currentSubmission = useSelector(state => state.submission)
     const dispatch = useDispatch()
@@ -55,7 +58,6 @@ const ControlledForm = () => {
                     Search News By Country
                     <SelectCountry countrySet={countrySet}/>
                 </label>
-                
                 <input type="submit" value="Search"/>
             </form>
             </div>
