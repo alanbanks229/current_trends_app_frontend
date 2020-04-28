@@ -9,13 +9,12 @@ import {useSelector, useDispatch} from "react-redux"
 import {geolocation_unavailable} from "../redux/Geolocation.js"
 import {received_location} from "../redux/Geolocation.js"
 import {get_city_state} from "../redux/CityState.js"
-import {fetch_local_news} from "../helper_methods/fetch_local_news.js"
 
 
 export const Home = (props) => {
 
     const currentCoordinates = useSelector(state => state.coordinates)
-    const [ coordinate, coordinateSet ] = useState(currentCoordinates)
+    // const [ coordinate, coordinateSet ] = useState(currentCoordinates)
     
     // if this is true make a button appear above that if a user clicks it, renders local
     // news 
@@ -54,7 +53,11 @@ export const Home = (props) => {
                   dispatch(received_location(event, coordinates))
                   fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&localityLanguage=en`)
                     .then(response => response.json())
-                    .then(data => dispatch(get_city_state(data)))
+                    .then(data => {
+                      user_location_acquiredSet(true)
+                      dispatch(get_city_state(data))
+                    }
+                  )
               }
       
               const error = (err) => {
@@ -62,8 +65,7 @@ export const Home = (props) => {
               }
               
               navigator.geolocation.getCurrentPosition(success, error, options)
-              user_location_acquiredSet(true)
-
+              
           }
           
       } else {

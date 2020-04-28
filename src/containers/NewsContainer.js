@@ -25,14 +25,23 @@ const NewsContainer = ({search_submitted, user_location}) => {
     }, [search_submitted])
     
     function fetchNews(search_params) {
-        // debugger
+        //Everything search param does not allow country but includes langauge... so .... figure it out...
+        debugger
         if (search_params !== ""){
             const api_key = 'c2fc6bdd3bcb4a139b303cd57af45cc2'
-            let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&apiKey=${api_key}`
-            // debugger
-            fetch(url)
-                .then(res => res.json())
-                .then(data => renderCards(data))
+            if (search_params.category !== null) {
+                let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&category=${search_params.category}&apiKey=${api_key}`
+                // debugger
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => renderCards(data))
+            } else {
+                let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&apiKey=${api_key}`    
+                // debugger
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => renderCards(data))
+            }
         } 
 
     }  

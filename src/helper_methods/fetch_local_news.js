@@ -1,5 +1,6 @@
 
 export function fetch_local_news(user_location){
+    debugger
     let data;
     const api = '5d94a4280599426498934113df289233';
     const requestHeaders = {

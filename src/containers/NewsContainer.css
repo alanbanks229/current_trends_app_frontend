@@ -36,7 +36,8 @@ header {
     height: auto;
 }
 
-.NewsCard img {
+/*in local news this is named different */
+.NewsCard .img-responsive {
     width: 100%;
     height: auto;
 }

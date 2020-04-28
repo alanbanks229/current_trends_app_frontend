@@ -86,7 +86,10 @@ class SelectCountry extends React.Component {
 
   render() {
     return (
+      <>
+      <p>Default: (USA)</p>
       <Dropdown onChange={(event) => this.onInputChange(event, countryOptions)} placeholder='Select Country' options={countryOptions} search selection/>
+      </>
     )
   }
 }

@@ -28,7 +28,7 @@ const LocalNewsPage = ({user_location}) => {
                     'Ocp-Apim-Subscription-Key': api,
                 },
             };
-            debugger
+            // debugger
             let URL = `https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=${userLocation.city}, ${userLocation.state}&originalImg=true`
                 fetch(URL, requestHeaders)
                 .then((response) => response.json())
@@ -40,7 +40,7 @@ const LocalNewsPage = ({user_location}) => {
     
         function renderCards(data){
             console.log(data)
-            debugger
+            // debugger
             if (data){
                 cardsSet(data)
             } 
@@ -52,6 +52,7 @@ const LocalNewsPage = ({user_location}) => {
             <div className="Local_News_Container">
                 {cards ? 
                 <div className="total_num_articles_container">
+                    <h3>Your Local News: {user_city_state.city}, {user_city_state.state}</h3>
                     <h3 className="numberResults">Total Estimated Matches ({cards.totalEstimatedMatches} results found)</h3>
                 </div>
                 : 

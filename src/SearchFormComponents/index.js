@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux"
 import {update_input_field_action} from "../redux/update_search.js"
 import {input_submission_action} from "../redux/search_bar_submission.js"
 import SelectCountry from "./select_country.js"
-
+import SelectSubcategory from "./select_subcategory.js"
 
 
 
@@ -14,6 +14,12 @@ const ControlledForm = () => {
     const [ inputfield, inputFieldSet ] = useState(currentSearch)
     const [ endpoint, endpointSet ] = useState('top-headlines')
     const [ country, countrySet ] = useState('us')
+    const [ top_headlines_checked, top_headlines_checkedSet ] = useState(true) //probably don't need this use endpoint set that was declared earlier
+    const [ category, categorySet ] = useState(null) //for users looking for news in trending sub-categories
+    const [ subCategoryFilter, subCategoryFilterSet ] = useState(false)
+    // top-headlines?country=us
+     // &category=entertainment  or &category=business  or &category=health  or   &category=science    or   &category=sports    or  &category=technology
+     // &apiKey=API_KEY
 
 
 
@@ -30,6 +36,19 @@ const ControlledForm = () => {
         }
     }
 
+    const updateSubCategFilter = (event) => {
+        //this makes it so that when user hides subcategory filter... the category filter = null
+        if (event.target.checked === false){
+            categorySet(null)
+        }
+        subCategoryFilterSet(!subCategoryFilter)
+    }
+
+    const updateCategory = (user_selection) => {
+        debugger
+        categorySet(user_selection)
+    }
+
     const updateInputField = (e) => {
         inputFieldSet(e.target.value)
     }
@@ -37,7 +56,7 @@ const ControlledForm = () => {
             <div className="SearchForm">
                 <form id="search_form" onSubmit={(event) => {
                     event.preventDefault()
-                    dispatch(input_submission_action(event, {input: inputfield, endpoint: endpoint, country: country}))}}>
+                    dispatch(input_submission_action(event, {input: inputfield, endpoint: endpoint, country: country, category: category}))}}>
                 <input type="text" onChange={(event) => {
                     updateInputField(event)
                     dispatch(update_input_field_action(event))}
@@ -54,6 +73,12 @@ const ControlledForm = () => {
                         Everything
                     </label>
                 </div>
+                <label>
+                    Filter by sub-category (optional)
+                    <input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>
+                </label>
+                {subCategoryFilter ? (<SelectSubcategory updateCateg={updateCategory}/>): (null)}
+                <br/>
                 <label>
                     Search News By Country
                     <SelectCountry countrySet={countrySet}/>

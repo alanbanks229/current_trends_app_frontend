@@ -6,7 +6,6 @@ export function get_city_state(json_result){
                         zip: json_result.postcode
                     }
 
-    debugger
     return {
         type: "RETRIEVING_CITY_STATE",
         payload: user_location
@@ -16,7 +15,7 @@ export function get_city_state(json_result){
 export default function city_state_Reducer(state = null, action){
     switch(action.type) {
         case "RETRIEVING_CITY_STATE":
-            debugger
+            
             return action.payload
         default:
             return state

@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import './LocalCard.css'
 import './LocalNewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 
