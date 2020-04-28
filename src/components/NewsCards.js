@@ -1,8 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './NewsCard.css'
 import '../containers/NewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 function News_Card(props){
+
+
+    const [ img_ready, img_readySet ] = useState(false)
+
+    const handleImageLoaded = () => {
+        img_readySet(true)
+    }
+    
 
     //goal is to create NEW fetch request to bookmarks
     //Bookmark will have a user_id and card_info
@@ -22,15 +30,23 @@ function News_Card(props){
         
     }
 
+    console.log("The URL is: ", props.image)
+    console.log("The Key is: ", props.key)
 
     return(
-        <div className='NewsCard' key={props.key}>
+        <div className='NewsCard'>
             <header className="card-header">
                 <h4 className="card-header-title">{props.source}</h4>
                 <a href={props.url} target="_blank" rel="noopener noreferrer">Link Source</a>
             </header>
-            {props.image ? <img src={props.image} className="img-responsive"/> : <img src={missing_img} className="img-responsive"/>}
-            
+            {props.image ? ( img_ready ? (<img src={props.image} alt={props.title} className="img-responsive"/>) 
+                                        : (<div>loading 
+                                            <img src={props.image} onLoad={handleImageLoaded} style={{display: 'none'}}/>
+                                          </div>)
+                            ) 
+                        :
+                            ((<img src={missing_img} className="article_img"/>))
+            }
             <br></br>
             <div className="img_caption">
                 {props.author ? <p className="author">By: {props.author}</p>: <p>provided by {props.source}</p>}

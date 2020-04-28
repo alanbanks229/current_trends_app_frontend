@@ -7,12 +7,13 @@ import Home from './components/Home'
 import Login from './components/registrations/Login'
 import Signup from './components/registrations/Signup'
 import About from './components/About'
+import LocalNewsPage from './components/local_news'
 
 // import './App.css';
 
 const App = (props) => {
 
-  const [ user, userSet ] = useState({})
+  const [ user, userSet ] = useState(null)
   const [ isLoggedIn, isLoggedInSet ] = useState(false)
 
 
@@ -38,7 +39,7 @@ const App = (props) => {
 
   const handleLogout = () => {
     isLoggedInSet(false)
-    userSet({})
+    userSet(null)
   }
 
     const currentSubmission = useSelector(state => state.submitted)
@@ -53,7 +54,7 @@ const App = (props) => {
             />
             <Route 
               exact path='/' 
-              render={props => (<Home {...props} handleLogout={handleLogout} handleLogin={handleLogin} loggedInStatus={isLoggedIn}/>)}
+              render={props => (<Home {...props} handleLogout={handleLogout} handleLogin={handleLogin} loggedInStatus={isLoggedIn} user={user} /> )}
             />
             <Route 
               exact path='/login' 
@@ -62,6 +63,10 @@ const App = (props) => {
             <Route 
               exact path='/signup' 
               render={props => (<Signup {...props} handleLogin={handleLogin} loggedInStatus={isLoggedIn}/>)}
+            />
+            <Route
+              exact path='/local_news'
+              render={props => (<LocalNewsPage {...props} handleLogout={handleLogout} loggedInStatus={isLoggedIn}/>)}
             />
           </Switch>
         </BrowserRouter>

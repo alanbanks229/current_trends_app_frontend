@@ -5,12 +5,14 @@ import thunk from "redux-thunk";
 import inputFieldReducer from './update_search.js'
 import submissionReducer from './search_bar_submission.js'
 import geolocationReducer from './Geolocation.js'
+import city_state_Reducer from './CityState.js'
 
 //Make some good key names for your reducers
 const rootReducer = combineReducers({
   input_field: inputFieldReducer,
   submitted: submissionReducer,
-  location: geolocationReducer
+  coordinates: geolocationReducer,
+  user_location: city_state_Reducer
 })
 
 

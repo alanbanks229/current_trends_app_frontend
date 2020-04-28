@@ -1,25 +1,22 @@
 import React, {useEffect, useState} from 'react'
+import {useSelector, useDispatch} from "react-redux"
 import NewsCards from "../components/NewsCards.js"
 
-const NewsContainer = ({search_submitted}) => {
+const NewsContainer = ({search_submitted, user_location}) => {
 
 //In news container it will receive the form submitted and from the filters applied
 //we will render the specific news cards.
+// 5d94a4280599426498934113df289233
+// //BigDataCloud API KEY 08f39e5268b84df2a3d602cce60a519e
 
     const [ searchparams, searchparamsSet ] = useState(search_submitted)
 
     const [ cards, cardsSet ] = useState(null)
 
-    const TOP_HEADLINES_TRUMP = 'https://newsapi.org/v2/top-headlines?' +
-    'q=trump&' +
-    'apiKey=API_KEY'
+    const currentCoordinates = useSelector(state => state.coordinates)
+    const user_city_state = useSelector(state => state.user_location)
+    
 
-    const POPULAR_APPLE_ARTICLES = 'https://newsapi.org/v2/everything?' + 
-                                'q=apple&' +
-                                'from=2020-04-22&' +
-                                'to=2020-04-22&' +
-                                'sortBy=popularity' +
-                                'apiKey=c2fc6bdd3bcb4a139b303cd57af45cc2';
 
 
     useEffect(() => {
@@ -38,7 +35,7 @@ const NewsContainer = ({search_submitted}) => {
                 .then(data => renderCards(data))
         } 
 
-    }
+    }  
 
     function renderCards(data){
         console.log(data)
@@ -53,13 +50,12 @@ const NewsContainer = ({search_submitted}) => {
         return null
     }
 
-
     return (
 
         <div className="NewsContainer">
             {cards ? 
             <div className="total_num_articles_container">
-                <h3 className="numberResults">Total Results: {cards.totalResults}</h3>
+                <h3 className="numberResults">List of Articles ({cards.totalResults} results found)</h3>
             </div>
             : 
             null}
@@ -79,6 +75,7 @@ const NewsContainer = ({search_submitted}) => {
                         content={article.content}
                         card_id={i}
                         article={article}
+                        key={i}
                         />
                     )
                 )}

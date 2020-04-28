@@ -6,27 +6,27 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      username: '',
       email: '',
       password: '',
-      location: '',
       errors: ''
      };
   }
-    componentWillMount() {
+    componentDidMount() {
         return this.props.loggedInStatus ? this.redirect() : null
     }
     handleChange = (event) => {
         const {name, value} = event.target
+
+        // for example: below will do {email: "abanks229@gmail.com"} depending on what event.target is
         this.setState({
         [name]: value
         })
     };
+
     handleSubmit = (event) => {
     event.preventDefault()
-    const {username, email, password} = this.state
+    const { email, password} = this.state
     let user = {
-      username: username,
       email: email,
       password: password
     }
@@ -42,10 +42,13 @@ class Login extends Component {
         })
       }
     })
-    .catch(error => console.log('api errors:', error))
+    .catch(error => {
+      alert("Network error occurred, refer to terminal", this.state.errors)
+      console.log('api errors:', error)})
     };
 
     redirect = () => {
+        console.log("I believe when we hit redirect(), we are taken to localhost:3000/")
         this.props.history.push('/')
     }
 
@@ -63,19 +66,12 @@ class Login extends Component {
     }
 
     render() {
-    const {username, email, password} = this.state
+    const {email, password} = this.state
     
     return (
         <div>
             <h1>Log In</h1>
             <form onSubmit={this.handleSubmit}>
-            <input
-                placeholder="username"
-                type="text"
-                name="username"
-                value={username}
-                onChange={this.handleChange}
-            />
             <input
                 placeholder="email"
                 type="text"
