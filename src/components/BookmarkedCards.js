@@ -3,7 +3,7 @@ import './LocalNewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 
 
-function Local_News_Card(props){
+function BookmarkedCards(props){
 
 
     const [ img_ready, img_readySet ] = useState(false)
@@ -15,7 +15,7 @@ function Local_News_Card(props){
 
     //goal is to create NEW fetch request to bookmarks
     //Bookmark will have a user_id and card_info
-    function createBookMark() {
+    function removeBookMark() {
         let payload = {
             article_data: props.article
         }
@@ -30,8 +30,7 @@ function Local_News_Card(props){
         
     }
 
-    console.log("The URL is: ", props.article_url)
-    console.log("The Key is: ", props.key)
+    console.log("The Card is: ", props.card)
 
     return(
         <div className='NewsCard' id={props.id}>
@@ -57,10 +56,10 @@ function Local_News_Card(props){
                 <br></br>
             </div>
             <div className="button">
-                <button onClick={createBookMark} data-card-id={props.id} className="news_card_button">bookmark</button>
+                <button onClick={removeBookMark} data-card-id={props.id} className="news_card_button">bookmark</button>
             </div>
         </div>
     )
 }
 
-export default Local_News_Card
+export default BookmarkedCards

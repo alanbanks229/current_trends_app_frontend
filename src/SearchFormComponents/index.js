@@ -16,32 +16,12 @@ const ControlledForm = () => {
     const [ endpoint, endpointSet ] = useState('top-headlines')
     const [ country, countrySet ] = useState('us')
     const [ top_headlines_checked, top_headlines_checkedSet ] = useState(true) //probably don't need this use endpoint set that was declared earlier
+
     const [ category, categorySet ] = useState(null) //for users looking for news in trending sub-categories
     const [ subCategoryFilter, subCategoryFilterSet ] = useState(false)
 
     const [ newsSource, newsSourceSet ] = useState(null)
     const [ newsSourceFilter, newsSourceFilterSet ] = useState(false)
-    // sources
-    /*
-    id: 'abc-news', name: "ABC News"
-    id 'bbc-news'
-    id 'ars-technica'
-
-    theoretically what I found is if I wanted to show pages of results I need some kind of state to keep track
-    of in order to do that... News API has a page query parameter, and to get access to the next result I would theoritically
-    have to make another fetch request to page=2 which is stupid af... 
-
-    so maybe its best ot make it so that I try to limit it to 100 pages maximum and thats it... and creates 5 pages of 20 based on top 100...
-
-    fetch('https://newsapi.org/v2/top-headlines?
-            sources=bbc-news,abc-news,ars-technica
-            &pageSize=30
-            &apiKey=c2fc6bdd3bcb4a139b303cd57af45cc2')
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-
-
-    */
 
 
 
@@ -51,7 +31,6 @@ const ControlledForm = () => {
     console.log("currentSearch is : ", currentSearch)
 
     const updateEndPoint = (e) => {
-        
         console.log(endpoint)
         if (endpoint !== e.target.value){
             endpointSet(e.target.value)
@@ -71,17 +50,21 @@ const ControlledForm = () => {
         categorySet(user_selection)
     }
 
+    const updateNewsSourceFilter = (event) => {
+        debugger
+        if (event.target.checked === true){
+            countrySet('')
+        } else {
+            newsSourceSet(null)
+            console.log("This should not get hit after form Submission")
+        }
+        newsSourceFilterSet(!newsSourceFilter)
+    }
+
     //need to finish implementing this
     const updateNewsSource = (user_selections) => {
         debugger
-        newsSourceSet(user_selection)
-    }
-
-    const newsSourceFilter = (event) => {
-        if (event.target.checked === false){
-            countrySet('')
-        }
-        newsSourceFilterSet(!newsSourceFilter)
+        newsSourceSet(user_selections)
     }
 
     const updateInputField = (e) => {
@@ -116,7 +99,7 @@ const ControlledForm = () => {
                 <br/>
                 <label>
                     Filter by news-source (optional)
-                    <input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSource(event)}/>
+                    <input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSourceFilter(event)}/>
                 </label>
                 {newsSourceFilter ? (<SelectNewsSources updateNewsSource={updateNewsSource}/>): (null)}
                 <br/>

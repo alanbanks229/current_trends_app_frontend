@@ -6,7 +6,6 @@ class Signup extends Component {
     this.state = { 
       username: '',
       email: '',
-      location: '',
       password: '',
       password_confirmation: '',
       errors: ''
@@ -20,11 +19,10 @@ handleChange = (event) => {
   };
 handleSubmit = (event) => {
     event.preventDefault()
-    const {username, email, location, password, password_confirmation} = this.state
+    const {username, email, password, password_confirmation} = this.state
     let user = {
       username: username,
       email: email,
-      location: location,
       password: password,
       password_confirmation: password_confirmation
     }
@@ -42,6 +40,7 @@ axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
     .catch(error => console.log('api errors:', error))
   };
 redirect = () => {
+  debugger
     this.props.history.push('/')
   }
 handleErrors = () => {
@@ -54,7 +53,7 @@ handleErrors = () => {
     )
   }
 render() {
-    const {username, email, location, password, password_confirmation} = this.state
+    const {username, email, password, password_confirmation} = this.state
 return (
       <div>
         <h1>Sign Up</h1>
@@ -71,13 +70,6 @@ return (
             type="text"
             name="email"
             value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="(optional) City or Zip Code"
-            type="text"
-            name="location"
-            value={location}
             onChange={this.handleChange}
           />
           <input 

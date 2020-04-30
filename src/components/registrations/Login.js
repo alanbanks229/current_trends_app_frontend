@@ -12,6 +12,7 @@ class Login extends Component {
      };
   }
     componentDidMount() {
+      console.log("Inside component did mount", this.props.loggedInStatus)
         return this.props.loggedInStatus ? this.redirect() : null
     }
     handleChange = (event) => {
@@ -24,32 +25,35 @@ class Login extends Component {
     };
 
     handleSubmit = (event) => {
-    event.preventDefault()
-    const { email, password} = this.state
-    let user = {
-      email: email,
-      password: password
-    }
-    
-    axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
-    .then(response => {
-      if (response.data.logged_in) {
-        this.props.handleLogin(response.data)
-        this.redirect()
-      } else {
-        this.setState({
-          errors: response.data.errors
-        })
+      event.preventDefault()
+      const { email, password} = this.state
+      let user = {
+        email: email,
+        password: password
       }
-    })
-    .catch(error => {
-      alert("Network error occurred, refer to terminal", this.state.errors)
-      console.log('api errors:', error)})
+      
+      axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
+      .then(response => {
+        debugger
+        if (response.data.logged_in) {
+          let hash = {}
+          hash['data'] = response.data
+          this.props.handleLogin(hash)
+          this.redirect() //line 50
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
+      .catch(error => {
+        alert("Network error occurred, refer to terminal", this.state.errors)
+        console.log('api errors:', error)})
     };
 
     redirect = () => {
-        console.log("I believe when we hit redirect(), we are taken to localhost:3000/")
-        this.props.history.push('/')
+          console.log("I believe when we hit redirect(), we are taken to localhost:3000/")
+          this.props.history.push('/')
     }
 
     handleErrors = () => {

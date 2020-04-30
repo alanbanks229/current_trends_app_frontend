@@ -21,7 +21,6 @@ const LocalNewsPage = ({user_location}) => {
 
 
         const fetch_local_news = (userLocation) => {
-            let data;
             const api = '5d94a4280599426498934113df289233';
             const requestHeaders = {
                 headers: {

@@ -6,13 +6,17 @@ import inputFieldReducer from './update_search.js'
 import submissionReducer from './search_bar_submission.js'
 import geolocationReducer from './Geolocation.js'
 import city_state_Reducer from './CityState.js'
+import user_logged_reducer from './logged_in_status.js'
+import bookmark_reducer from './bookmarks.js'
 
 //Make some good key names for your reducers
 const rootReducer = combineReducers({
   input_field: inputFieldReducer,
   submitted: submissionReducer,
   coordinates: geolocationReducer,
-  user_location: city_state_Reducer
+  user_location: city_state_Reducer,
+  current_user: user_logged_reducer,
+  bookmarks: bookmark_reducer
 })
 
 
