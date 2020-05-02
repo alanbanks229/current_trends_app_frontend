@@ -4,7 +4,8 @@ import './NewsCard.css'
 import '../containers/NewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 import {new_bookmark_action, remove_bookmark_action} from '../redux/bookmarks.js'
-
+import swal from '@sweetalert/with-react';
+import './cancelbookmark_alertbox.css'
 
 function News_Card(props){
 
@@ -48,20 +49,45 @@ function News_Card(props){
     function removeBookMark() {
         console.log("removing bookmark")
         if (currentUser){
-            fetch(`http://localhost:3001/user_bookmarks/${bookmark_id}`, {
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'}
-            }).then(response => {
-                if (response.ok) {
-                    return Promise.resolve('Bookmark Deleted.')
-                } else {
-                    return Promise.reject('An error occurred.')
+            swal({
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                  cancel: {text: "Cancel", value: "Close", visible: true},
+                  confirm: {text: "Remove", value: "Confirm"}
+                },
+                content: (
+                  <div className="flex">
+                    <img src={props.image} className="alertbox_img"/>
+                    <h1>Do you want to remove this bookmark?</h1>
+                  </div>
+                )
+              })
+            .then( (value) => {
+                switch (value) {
+                    case "Close":
+                        swal("Canceled Action", "Bookmark will remain", "info")
+                        break;
+                    case "Confirm":
+                        fetch(`http://localhost:3001/user_bookmarks/${bookmark_id}`, {
+                            method: 'DELETE',
+                            headers: {'Content-Type': 'application/json'}
+                        }).then(response => {
+                            if (response.ok) {
+                                return Promise.resolve('Bookmark Deleted.')
+                            } else {
+                                return Promise.reject('An error occurred.')
+                            }
+                        }).then(result => {
+                            dispatch(remove_bookmark_action(bookmark_id))
+                            bookmark_id_Set(null)
+                            bookmarkedSet(false)
+                        })
+                        break;
+                    
+                    default:
+                        swal("uhh ignore this message bad coding")
                 }
-            }).then(result => {
-                dispatch(remove_bookmark_action(bookmark_id))
-                bookmark_id_Set(null)
-                bookmarkedSet(false)
-                console.log(result)
             })
         } else {
             console.log("how the heck did you even book mark in the first place if you're not logged in")

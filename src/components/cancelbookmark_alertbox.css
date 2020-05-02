@@ -1,0 +1,13 @@
+.swal-modal .flex {
+	display: flex!important;
+    flex-wrap: wrap!important;
+    overflow: hidden;
+	justify-content: center;
+}
+
+.flex .alertbox_img{
+    height: auto;
+    max-width: 100%;
+    border: blue solid 5px;
+    object-fit: contain;
+}

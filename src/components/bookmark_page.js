@@ -5,7 +5,7 @@ import NewsCards from "./NewsCards.js"
 
 const BookmarkPage = ({user}) => {
 
-    const user_bookmark_ids = useSelector(state => state.bookmarks)
+    const user_bookmark_ids = useSelector(state => state.user_bookmark_ids)
     const currentUser = useSelector(state => state.current_user)
     const [ cards, cardsSet ] = useState(null)
 
@@ -19,6 +19,7 @@ const BookmarkPage = ({user}) => {
 
     function fetch_bookmarks(bookmark_ids){
         //create custom route called /your_bookmarks in backend ... bruh i just need to pass in the user id lol
+        debugger
         fetch('http://localhost:3001/your_bookmarks', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -30,6 +31,7 @@ const BookmarkPage = ({user}) => {
             if (data.message){
                 console.log(data.message)
             } else {
+                debugger
                 renderCards(data)
             }
         })
@@ -40,7 +42,7 @@ const BookmarkPage = ({user}) => {
     }
 
     return(
-        <div className="Bookmark_Container">
+        <div className="NewsContainer">
             {cards ?
             <div className="total_num_bookmarks">
                 <h3>Your Bookmarks</h3>
@@ -50,10 +52,10 @@ const BookmarkPage = ({user}) => {
             null}
 
             {cards ?
-            <div className="bookmark_flex_div">
+            <div className="flex">
                 {cards.map((article, i) =>
                     (
-                        <NewsCards 
+                        <BookmarkedNewsCards 
                         source={article.article_data.source.name}
                         author={article.article_data.author}
                         title={article.article_data.title}
@@ -62,7 +64,8 @@ const BookmarkPage = ({user}) => {
                         image={article.article_data.urlToImage}
                         published={article.article_data.publishedAt}
                         content={article.article_data.content}
-                        card_id={i}
+                        bookmark_id={article.id}
+                        userbookmark_id={article.match_id[0]}
                         article={article.article_data}
                         // key={i}
                         />

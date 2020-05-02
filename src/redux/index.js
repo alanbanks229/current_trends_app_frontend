@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   coordinates: geolocationReducer,
   user_location: city_state_Reducer,
   current_user: user_logged_reducer,
-  bookmarks: bookmark_reducer
+  user_bookmark_ids: bookmark_reducer
 })
 
 

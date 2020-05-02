@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+
+import swal from '@sweetalert/with-react';
+import './signup.css'
+
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -26,10 +31,11 @@ handleSubmit = (event) => {
       password: password,
       password_confirmation: password_confirmation
     }
-axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
+    axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.status === 'created') {
         this.props.handleLogin(response.data)
+        swal("Congrats!", "🙌Your account is created!🙌", "success");
         this.redirect()
       } else {
         this.setState({
@@ -44,6 +50,21 @@ redirect = () => {
     this.props.history.push('/')
   }
 handleErrors = () => {
+  swal({
+    text: "Account Creation Error: (See Below)",
+    icon: "error",
+    buttons: {
+      cancel: "Close",
+    },
+    content: (
+      <div>
+        <br/>
+        <ul>{this.state.errors.map((error) => {
+          return <li key={error}>{error}</li>
+        })}</ul> 
+      </div>
+    )
+  })
     return (
       <div>
         <ul>{this.state.errors.map((error) => {
