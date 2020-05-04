@@ -41,6 +41,10 @@ class Login extends Component {
           let hash = {}
           hash['data'] = response.data
           this.props.handleLogin(hash)
+          if (response.data.user.location){
+            const dispatch = useDispatch()
+            dispatch(get_city_state(response.data.user.location))
+          }
           this.redirect() //line 54
         } else {
           this.setState({

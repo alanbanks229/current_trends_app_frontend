@@ -1,34 +1,34 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {useDispatch} from "react-redux"
 import {get_city_state} from "../../redux/CityState.js"
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      email: '',
-      password: '',
-      errors: ''
-     };
-  }
-    componentDidMount() {
-      console.log("Inside component did mount", this.props.loggedInStatus)
-        return this.props.loggedInStatus ? this.redirect() : null
-    }
-    handleChange = (event) => {
+const Login = (props) => {
+
+    const [email, emailSet] = useState('')
+    const [ password, passwordSet ] = useState('')
+    const [ errors, errorsSet ] = useState('')
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        return (props.loggedInStatus ? redirect() : null)
+    }, [])
+
+    const handleChange = (event) => {
         const {name, value} = event.target
 
         // for example: below will do {email: "abanks229@gmail.com"} depending on what event.target is
-        this.setState({
-        [name]: value
-        })
-    };
+        
+        if (name === 'email'){
+            emailSet(value)
+        } else {
+            passwordSet(value)
+        }
+    }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
       event.preventDefault()
-      const { email, password} = this.state
       let user = {
         email: email,
         password: password
@@ -36,33 +36,35 @@ class Login extends Component {
       
       axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
       .then(response => {
-        debugger
+        
         if (response.data.logged_in) {
           let hash = {}
           hash['data'] = response.data
-          this.props.handleLogin(hash)
-          this.redirect() //line 54
+          props.handleLogin(hash)
+          if (response.data.user.location){
+            dispatch(get_city_state(response.data.user.location))
+          }
+          debugger
+          redirect() //line 54
         } else {
-          this.setState({
-            errors: response.data.errors
-          })
+          errorsSet(response.data.errors)
         }
       })
       .catch(error => {
-        alert("Network error occurred, refer to terminal", this.state.errors)
+        alert("Network error occurred, refer to terminal", errors)
         console.log('api errors:', error)})
-    };
-
-    redirect = () => {
-          console.log("I believe when we hit redirect(), we are taken to localhost:3000/")
-          this.props.history.push('/')
     }
 
-    handleErrors = () => {
+    const redirect = () => {
+          console.log("I believe when we hit redirect(), we are taken to localhost:3000/")
+          props.history.push('/')
+    }
+
+    const handleErrors = () => {
         return (
         <div>
             <ul>
-            {this.state.errors.map(error => {
+            {errors.map(error => {
             return <li key={error}>{error}</li>
             })
             }
@@ -70,27 +72,25 @@ class Login extends Component {
         </div>
         )
     }
-
-    render() {
-    const {email, password} = this.state
+    // const {email, password} = this.state
     
     return (
         <div>
             <h1>Log In</h1>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={(event) => handleSubmit(event)}>
             <input
                 placeholder="email"
                 type="text"
                 name="email"
                 value={email}
-                onChange={this.handleChange}
+                onChange={(event)=>handleChange(event)}
             />
             <input
                 placeholder="password"
                 type="password"
                 name="password"
                 value={password}
-                onChange={this.handleChange}
+                onChange={(event)=>handleChange(event)}
             />
             <button placeholder="submit" type="submit">
                 Log In
@@ -102,11 +102,10 @@ class Login extends Component {
             </form>
             <div>
             {
-                this.state.errors ? this.handleErrors() : null
+                errors ? handleErrors() : null
             }
             </div>
         </div>
         );
     }
-}
 export default Login;

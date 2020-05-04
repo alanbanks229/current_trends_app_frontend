@@ -1,0 +1,39 @@
+.header-nav-bar{
+    text-align: center;
+    width: 80%;
+    display: block;
+    border: gray solid 3px;
+}
+
+.header-nav-bar .logo{
+    float: left;
+}
+
+.header-nav-bar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav-bar li{
+    float: right;
+}
+
+.header-nav-bar li a {
+    display: inline-block;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    /* padding: 14px 16px; */
+    text-decoration: none; 
+}
+
+.header-nav-bar li a:hover {
+    background-color: rgb(4, 0, 235);
+}
+
+.header-nav-bar a{
+    border: black solid 3px;
+    display: block;
+    padding: 8px;
+    background-color: rgb(197, 0, 0);
+}

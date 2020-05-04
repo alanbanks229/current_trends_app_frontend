@@ -13,7 +13,7 @@ const LocalNewsPage = ({user_location}) => {
         const [ cards, cardsSet ] = useState(null)
 
         useEffect(() => {
-            // debugger
+            debugger
             if (user_city_state){
                 fetch_local_news(user_city_state)
             }
@@ -32,19 +32,10 @@ const LocalNewsPage = ({user_location}) => {
                 fetch(URL, requestHeaders)
                 .then((response) => response.json())
                 .then((newsJSON) => {
+                    debugger
                     cardsSet(newsJSON)
-                    renderCards(newsJSON)
             })
           }
-    
-        function renderCards(data){
-            console.log(data)
-            // debugger
-            if (data){
-                cardsSet(data)
-            } 
-            return null
-        }
     
         return (
     
@@ -61,17 +52,21 @@ const LocalNewsPage = ({user_location}) => {
                 <div className="flex">
                     {cards.value.map((article, i) => 
                         (
+                            //I need this stupid inner conditional because one day app crashed by not having a defined image.contentURL
+                            (article.hasOwnProperty('image') ? (     
+                            
                             <LocalNewsCards
-                            source_provider_name={article.provider[0].name}
-                            source_provider_img_url={article.provider[0].image.thumbnail.contentUrl}
-                            article_title={article.name}
-                            article_url={article.url}
-                            article_img={article.image.contentUrl}
-                            date_published={article.datePublished}
-                            description={article.description}
-                            article={article}
-                            id={i}
-                            />
+                                source_provider_name={article.provider[0].name}
+                                source_provider_img_url={article.provider[0].image.thumbnail.contentUrl}
+                                article_title={article.name}
+                                article_url={article.url}
+                                article_img={article.image.contentUrl}
+                                date_published={article.datePublished}
+                                description={article.description}
+                                article={article}
+                                id={i}
+                            />) : (null))
+
                         ))}
                 </div>
                 : 

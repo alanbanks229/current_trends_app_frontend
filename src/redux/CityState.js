@@ -1,10 +1,20 @@
 export function get_city_state(json_result){
-    let user_location = {
-                        county: json_result.localityInfo["administrative"][2].name,
-                        city: json_result.locality,
-                        state: json_result.principalSubdivision,
-                        zip: json_result.postcode
-                    }
+    let user_location;
+    if (json_result.localityInfo){
+            user_location = {
+            county: json_result.localityInfo["administrative"][2].name,
+            city: json_result.locality,
+            state: json_result.principalSubdivision,
+            zip: json_result.postcode
+        }
+    }else{
+        user_location = {
+            county: json_result.county,
+            city: json_result.city,
+            state: json_result.state,
+            zip: json_result.zip
+        }
+    }
 
     return {
         type: "RETRIEVING_CITY_STATE",

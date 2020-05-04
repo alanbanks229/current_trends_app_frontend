@@ -5,6 +5,8 @@ import {useSelector, useDispatch} from "react-redux"
 import {geolocation_unavailable} from "../redux/Geolocation.js"
 import {received_location} from "../redux/Geolocation.js"
 import {get_city_state} from "../redux/CityState.js"
+import './navbar.css'
+import { Button, Icon } from 'semantic-ui-react'
 
 const NavBarContainer = (props) => {
 
@@ -17,6 +19,31 @@ const NavBarContainer = (props) => {
     const currentUser = useSelector(state => state.current_user)
     const dispatch = useDispatch()
 
+    const IconExampleIconGroup = () => {
+      return (
+        <div>
+      <Icon.Group size='large'>
+        <Icon name='user' />
+      </Icon.Group>
+      </div>
+    )}
+
+    const BookmarkIcon = () => {
+      return(
+      <Icon.Group size='large'>
+        <Icon name='bookmark' />
+      </Icon.Group>
+      )}
+
+    const NewsPaperIcon = () => {
+      return (
+        <div>
+          <Icon.Group size='large'>
+            <Icon name='newspaper outline' />
+          </Icon.Group>
+        </div>
+      )
+    }
     const handleClick = () => {
         axios.delete('http://localhost:3001/logout', {withCredentials: true})
         .then(response => {
@@ -24,6 +51,22 @@ const NavBarContainer = (props) => {
           props.props.history.push('/')
         })
         .catch(error => console.log(error))
+    }
+
+    const send_user_location_backend = (data) => {
+      if (currentUser){
+        var userId = currentUser.id
+        fetch(`http://localhost:3001/users/${userId}`, {
+          method: 'PATCH',
+          headers:  {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(json => console.log(json))
+      }
     }
   
     const getUserLocation = (event) => {
@@ -45,6 +88,7 @@ const NavBarContainer = (props) => {
                     .then(data => {
                       user_location_acquiredSet(true)
                       dispatch(get_city_state(data))
+                      send_user_location_backend(data)
                     }
                   )
               }
@@ -59,27 +103,67 @@ const NavBarContainer = (props) => {
           
       } else {
         //get rid of this
+      }
     }
-  }
+
+
     return (
         <>
         <div className="header-nav-bar">
+          <h2 className="logo">Current Trends</h2>
         { currentUser ? <> 
-                                <Link to='/logout' onClick={handleClick}>Log Out</Link><br/>
-                                <Link to='/your_bookmarks'>Bookmarks</Link><br/>
-                                </> 
+                          <ul>
+                              <li className="logout">
+                                  <Link to='/logout' onClick={handleClick}>
+                                      <Button animated>
+                                        <Button.Content visible>{IconExampleIconGroup()}</Button.Content>
+                                        <Button.Content hidden>
+                                            Log Out
+                                        </Button.Content>
+                                      </Button>
+                                  </Link>
+                              </li>
+
+                              <li className="bookmark">
+                                  <Link to='/your_bookmarks'>
+                                      <Button animated>
+                                        <Button.Content visible>{BookmarkIcon()}</Button.Content>
+                                        <Button.Content hidden>
+                                        <p>Bookmarks</p>
+                                        </Button.Content>
+                                      </Button>
+                                  </Link>
+                              </li>
+                              {user_location_acquired ?
+                              <li className="localnewsbtn">
+                                  <Link to='/local_news'>Local News</Link>
+                              </li>
+                                  : 
+                                  <Button animated>
+                                      <Button.Content visible>{NewsPaperIcon()}</Button.Content>
+                                      <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
+                                          Local News
+                                      </Button.Content>
+                                  </Button> 
+                              }
+                           </ul>
+                      </> 
                                 : 
                                 <> 
-                                    <Link to='/login'>Log in</Link><br/>
-                                    <Link to='/signup'>Sign Up</Link><br/>
+                                  <ul>
+                                    <li className="login"><Link to='/login'>Log in</Link></li>
+                                    <li className="signup"><Link to='/signup'>Sign Up</Link></li>
+                                    
+                                  </ul>
                                 </>
         }
-        {user_location_acquired ? <Link to='/local_news'>Local News</Link> : <div>Set up Geolocation to get access to local news </div>}
+        <h3>Current weather in your area:</h3>
+        {user_location_acquired ? <Link to='/local_news'>Local News</Link> : <div><li>Set up Geolocation to get access to local news</li></div>}
         <button onClick={(event) => getUserLocation(event)} className="get_local_news_btn">Click to set up Geolocation</button>
         <br/>
         { props.props.user ? <>
                           <h3>Welcome {props.props.user.username}</h3>
-                          <h3>Current Coords are : </h3>
+                          <h3>Current Weather is:</h3>
                       </> 
                       : null }
         </div>
