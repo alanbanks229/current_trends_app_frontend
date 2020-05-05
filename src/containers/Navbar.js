@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from "react-redux"
@@ -7,18 +7,26 @@ import {received_location} from "../redux/Geolocation.js"
 import {get_city_state} from "../redux/CityState.js"
 import './navbar.css'
 import { Button, Icon } from 'semantic-ui-react'
+import { css } from "@emotion/core";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const NavBarContainer = (props) => {
 
     const [ user_location_acquired, user_location_acquiredSet ] = useState(false)
     const [ lat, latSet ] = useState('')
     const [ long, longSet ] = useState('')
+    const [ loading, loadingSet ] = useState(false)
 
     const currentSubmission = useSelector(state => state.submitted)
     const userLocation = useSelector(state => state.user_location)
     const currentUser = useSelector(state => state.current_user)
     const dispatch = useDispatch()
 
+    const override = css`
+      display: inline-block;
+      margin: 0 auto;
+      border-color: #36D7B7;
+    `;
     const IconExampleIconGroup = () => {
       return (
         <div>
@@ -65,19 +73,20 @@ const NavBarContainer = (props) => {
           body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(json => console.log(json))
+        .then(json => loadingSet(false))
       }
     }
   
     const getUserLocation = (event) => {
       //If user location is already defined we should not run this function, instead render news
+      //we cant figure this out so i need a loading icon to appear here.
       if (userLocation == null)
       {
           if (!navigator.geolocation){
               dispatch(geolocation_unavailable)
           } else {
               var options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
-                
+              loadingSet(true)
               const success = (position) => {
                   var coordinates = position.coords;
                   latSet(coordinates.latitude)
@@ -129,7 +138,7 @@ const NavBarContainer = (props) => {
                                       <Button animated>
                                         <Button.Content visible>{BookmarkIcon()}</Button.Content>
                                         <Button.Content hidden>
-                                        <p>Bookmarks</p>
+                                        Bookmarks
                                         </Button.Content>
                                       </Button>
                                   </Link>
@@ -139,12 +148,38 @@ const NavBarContainer = (props) => {
                                   <Link to='/local_news'>Local News</Link>
                               </li>
                                   : 
-                                  <Button animated>
-                                      <Button.Content visible>{NewsPaperIcon()}</Button.Content>
-                                      <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
-                                          Local News
-                                      </Button.Content>
-                                  </Button> 
+                                  (loading ? (      
+                                  <div className="sweet-loading">
+                                    <p>Approximating your location, this will take a moment...</p>
+                                    <PropagateLoader
+                                      css={override}
+                                      size={15}
+                                      color={"#36D7B7"}
+                                      loading={loading}
+                                    />
+                                  </div>
+                                  ) : 
+                                  ((userLocation ? (
+                                  <li>
+                                    <Link to='/local_news'>
+                                      <Button animated>
+                                        <Button.Content visible>{NewsPaperIcon()}</Button.Content>
+                                        <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
+                                            Local News
+                                        </Button.Content>
+                                      </Button>
+                                      </Link>
+                                  </li>) : (<li>
+                                    <div className='disabled-link'>
+                                      <Button animated>
+                                        <Button.Content visible>{NewsPaperIcon()}</Button.Content>
+                                        <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
+                                            Get Local News
+                                        </Button.Content>
+                                      </Button>
+                                    </div>
+                                  </li>) )
+                                   ) )
                               }
                            </ul>
                       </> 
@@ -158,8 +193,8 @@ const NavBarContainer = (props) => {
                                 </>
         }
         <h3>Current weather in your area:</h3>
-        {user_location_acquired ? <Link to='/local_news'>Local News</Link> : <div><li>Set up Geolocation to get access to local news</li></div>}
-        <button onClick={(event) => getUserLocation(event)} className="get_local_news_btn">Click to set up Geolocation</button>
+        {/* {user_location_acquired ? <Link to='/local_news'>Local News</Link> : <div><li>Set up Geolocation to get access to local news</li></div>}
+        <button onClick={(event) => getUserLocation(event)} className="get_local_news_btn">Click to set up Geolocation</button> */}
         <br/>
         { props.props.user ? <>
                           <h3>Welcome {props.props.user.username}</h3>

@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux"
 import {update_input_field_action} from "../redux/update_search.js"
 import {input_submission_action} from "../redux/search_bar_submission.js"
-import SelectCountry from "./select_country.js"
-import SelectSubcategory from "./select_subcategory.js"
-import SelectNewsSources from "./select_news_sources.js"
-
+// import SelectCountry from "./select_country.js"
+// import SelectSubcategory from "./select_subcategory.js"
+// import SelectNewsSources from "./select_news_sources.js"
+import Filters from "./filter.js"
 
 
 const ControlledForm = () => {
@@ -15,13 +15,13 @@ const ControlledForm = () => {
     const [ inputfield, inputFieldSet ] = useState(currentSearch)
     const [ endpoint, endpointSet ] = useState('top-headlines')
     const [ country, countrySet ] = useState('us')
-    const [ top_headlines_checked, top_headlines_checkedSet ] = useState(true) //probably don't need this use endpoint set that was declared earlier
+    //const [ top_headlines_checked, top_headlines_checkedSet ] = useState(true) //probably don't need this use endpoint set that was declared earlier
 
     const [ category, categorySet ] = useState(null) //for users looking for news in trending sub-categories
-    const [ subCategoryFilter, subCategoryFilterSet ] = useState(false)
+    //const [ subCategoryFilter, subCategoryFilterSet ] = useState(false)
 
     const [ newsSource, newsSourceSet ] = useState(null)
-    const [ newsSourceFilter, newsSourceFilterSet ] = useState(false)
+    //const [ newsSourceFilter, newsSourceFilterSet ] = useState(false)
 
 
 
@@ -30,42 +30,42 @@ const ControlledForm = () => {
     const dispatch = useDispatch()
     console.log("currentSearch is : ", currentSearch)
 
-    const updateEndPoint = (e) => {
-        console.log(endpoint)
-        if (endpoint !== e.target.value){
-            endpointSet(e.target.value)
-        }
-    }
+    // const updateEndPoint = (e) => {
+    //     console.log(endpoint)
+    //     if (endpoint !== e.target.value){
+    //         endpointSet(e.target.value)
+    //     }
+    // }
 
-    const updateSubCategFilter = (event) => {
-        //this makes it so that when user hides subcategory filter... the category filter = null
-        if (event.target.checked === false){
-            categorySet(null)
-        }
-        subCategoryFilterSet(!subCategoryFilter)
-    }
+    // const updateSubCategFilter = (event) => {
+    //     //this makes it so that when user hides subcategory filter... the category filter = null
+    //     if (event.target.checked === false){
+    //         categorySet(null)
+    //     }
+    //     subCategoryFilterSet(!subCategoryFilter)
+    // }
 
-    const updateCategory = (user_selection) => {
-        debugger
-        categorySet(user_selection)
-    }
+    // const updateCategory = (user_selection) => {
+    //     debugger
+    //     categorySet(user_selection)
+    // }
 
-    const updateNewsSourceFilter = (event) => {
-        debugger
-        if (event.target.checked === true){
-            countrySet('')
-        } else {
-            newsSourceSet(null)
-            console.log("This should not get hit after form Submission")
-        }
-        newsSourceFilterSet(!newsSourceFilter)
-    }
+    // const updateNewsSourceFilter = (event) => {
+    //     debugger
+    //     if (event.target.checked === true){
+    //         countrySet('')
+    //     } else {
+    //         newsSourceSet(null)
+    //         console.log("This should not get hit after form Submission")
+    //     }
+    //     newsSourceFilterSet(!newsSourceFilter)
+    // }
 
-    //need to finish implementing this
-    const updateNewsSource = (user_selections) => {
-        debugger
-        newsSourceSet(user_selections)
-    }
+    ////need to finish implementing this
+    // const updateNewsSource = (user_selections) => {
+    //     debugger
+    //     newsSourceSet(user_selections)
+    // }
 
     const updateInputField = (e) => {
         inputFieldSet(e.target.value)
@@ -75,11 +75,15 @@ const ControlledForm = () => {
                 <form id="search_form" onSubmit={(event) => {
                     event.preventDefault()
                     dispatch(input_submission_action(event, {input: inputfield, endpoint: endpoint, country: country, category: category, news_source: newsSource}))}}>
-                <input type="text" onChange={(event) => {
-                    updateInputField(event)
-                    dispatch(update_input_field_action(event))}
-                    }/>
-                <div className="radio_endpoint">
+                <div class="ui small icon input">
+                    <input type="text" placeholder="search..." onChange={(event) => {
+                        updateInputField(event)
+                        dispatch(update_input_field_action(event))}
+                        }/>
+                    <i class="search icon"></i>
+                </div>
+                <Filters></Filters>
+                {/* <div className="radio_endpoint">
                     <label>
                     <input type="radio" value="top-headlines" name="endpoint" defaultChecked onClick={(e) => updateEndPoint(e)}/>
                     Top Headlines
@@ -106,7 +110,7 @@ const ControlledForm = () => {
                 <label>
                     Search News By Country
                     <SelectCountry countrySet={countrySet}/>
-                </label>
+                </label> */}
                 <input type="submit" value="Search"/>
             </form>
             </div>

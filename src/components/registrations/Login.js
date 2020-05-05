@@ -36,7 +36,7 @@ class Login extends Component {
       
       axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
       .then(response => {
-        debugger
+        // debugger
         if (response.data.logged_in) {
           let hash = {}
           hash['data'] = response.data

@@ -1,4 +1,5 @@
 .header-nav-bar{
+    margin: 0 auto;
     text-align: center;
     width: 80%;
     display: block;
@@ -21,14 +22,34 @@
 
 .header-nav-bar li a {
     display: inline-block;
-    color: rgb(255, 0, 0);
     text-align: center;
-    /* padding: 14px 16px; */
-    text-decoration: none; 
+}
+
+.disabled-link{
+    border: black solid 3px;
+    display: block;
+    padding: 8px;
+    background-color: rgb(197, 0, 0);
+}
+
+.disabled-link:hover{
+    background-color: rgb(4, 0, 235);
+}
+
+/* This is the paragraph tag inside localnewsbtn */
+.header-nav-bar li .Local_news_hidden{
+    display: inline-block;
+    text-align: center;
+    margin-bottom: auto;
 }
 
 .header-nav-bar li a:hover {
     background-color: rgb(4, 0, 235);
+}
+
+.header-nav-bar .sweet-loading{
+    display: inline-block;
+    margin: 0 auto;
 }
 
 .header-nav-bar a{

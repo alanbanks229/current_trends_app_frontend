@@ -44,7 +44,7 @@ const Login = (props) => {
           if (response.data.user.location){
             dispatch(get_city_state(response.data.user.location))
           }
-          debugger
+          //debugger
           redirect() //line 54
         } else {
           errorsSet(response.data.errors)
