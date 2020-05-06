@@ -10,6 +10,7 @@ import { Button, Icon } from 'semantic-ui-react'
 import { css } from "@emotion/core";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import logo_img from './current_trends_logojpg.jpg'
+import WeekContainer from './WeekContainer';
 
 const NavBarContainer = (props) => {
 
@@ -123,10 +124,10 @@ const NavBarContainer = (props) => {
           <div className="left-float-li-items">
           <ul>
             <li className="about-li">
-              <Link to='/about'> About </Link>
+              <Link to='/about'> <Button size='large'>About</Button> </Link>
             </li>
             <li className="logo-li">
-              <Link to='/'> <img src={logo_img} className="logo"/> </Link>
+              <Link to='/'> <button><img src={logo_img} className="logo"/></button></Link>
             </li>
           </ul>
           </div>
@@ -216,12 +217,10 @@ const NavBarContainer = (props) => {
                                   </ul>
                                 </>
         }
-        <h3>Current weather in your area:</h3>
-        {/* {user_location_acquired ? <Link to='/local_news'>Local News</Link> : <div><li>Set up Geolocation to get access to local news</li></div>}
-        <button onClick={(event) => getUserLocation(event)} className="get_local_news_btn">Click to set up Geolocation</button> */}
+        <WeekContainer />
         <br/>
         { props.props.user ? <>
-                          <h3>Welcome {props.props.user.username}</h3>
+                          <h3 className="welcome_user">Welcome {props.props.user.username}</h3>
                       </> 
                       : null }
         </div>

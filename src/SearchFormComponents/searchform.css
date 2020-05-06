@@ -134,16 +134,16 @@ p .sortByHeader {
     from {
         width: 15%;
     } to {
-        width: 70%;
+        width: 71%;
     }
 }
 
 .MuiExpansionPanelDetails-root{
-    background-color: rgba(207, 207, 207, 0.541)!important;
+    background:rgb(255, 255, 255)!important;
     width: 100%;
 }
 .MuiCollapse-wrapper{
-    background-color: rgb(0, 213, 255)!important;
+    background:rgb(255, 255, 255)!important;
     width: 100%;
 }
 

@@ -7,6 +7,7 @@ import {useSelector, useDispatch} from "react-redux"
 import NavBarContainer from '../containers/Navbar.js';
 
 
+
 export const Home = (props) => {
 
   const currentSubmission = useSelector(state => state.submitted)

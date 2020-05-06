@@ -3,26 +3,53 @@
     text-align: center;
     width: 80%;
     display: block;
-    background: rgb(255, 255, 255);
+    background:rgba(117, 166, 221, 0.794);
     border: gray solid 3px;
     overflow: hidden;
 }
 
 .left-float-li-items{
     float: left;
-    background: yellow;
+    background: rgb(0, 26, 255);
 }
 
 .left-float-li-items .logo{
     float: left!important;
     align-items: flex-start;
     max-width:100%;
-    height: 50px;
+    height: 55px;
 }
 
 .left-float-li-items .about-li{
     float: right!important;
 }
+.left-float-li-items .about-li button{
+    padding: 20px!important;
+    margin-top: 2%!important;
+    margin-left: 2%!important;
+    border:1px solid #66fcf1;
+    transition: all 0.3s ease;
+    color: #6689fc;
+}
+
+.left-float-li-items img{
+    border:3px solid #66fcf1;
+    transition: all 0.3s ease;
+    color: #6689fc;
+}
+
+.left-float-li-items .logo-li button{
+    background-color: rgb(4, 0, 235);
+    transition: all 0.3s ease;
+    color: #6689fc;
+}
+
+.left-float-li-items .logo-li button:hover{
+    background-color: rgb(255, 255, 255);
+    transition: all 0.3s ease;
+    color: #6689fc;
+}
+
 
 .left-float-li-items ul{
     list-style-type: none;
@@ -51,7 +78,9 @@
     background-color: rgb(0, 0, 0);
 }
 
-
+.left-float-li-items{
+    
+}
 
 .right-li-ul-items .localnewsbtn button{
     border:1px solid #66fcf1;
@@ -124,5 +153,9 @@
     border: blue solid 3px;
     display: block;
     padding: 1px;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(54, 106, 248);
+}
+
+.welcome_user{
+    background:rgba(0, 112, 240, 0.917);
 }
