@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux"
 import LocalNewsCards from "./Local_News_Cards.js"
+import NavBarContainer from '../containers/Navbar.js';
 
-const LocalNewsPage = ({user_location}) => {
+const LocalNewsPage = (props) => {
 
     //In news container it will receive the form submitted and from the filters applied
     //we will render the specific news cards.
@@ -62,7 +63,8 @@ const LocalNewsPage = ({user_location}) => {
           }
     
         return (
-    
+            <>
+            <NavBarContainer props={props}/>
             <div className="Local_News_Container">
                 {cards ? 
                 <div className="total_num_articles_container">
@@ -105,6 +107,7 @@ const LocalNewsPage = ({user_location}) => {
                 <div>Set up Geolocation on homepage first to see your local news</div>}
     
             </div>
+            </>
         )
     }
 
