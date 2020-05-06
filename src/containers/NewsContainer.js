@@ -41,24 +41,33 @@ const NewsContainer = ({search_submitted, user_location}) => {
         //debugger
         if (search_params !== ""){
             const api_key = 'c2fc6bdd3bcb4a139b303cd57af45cc2'
-            if (search_params.news_source) {
-                let string_of_news_sources = search_params.news_source.join('\,')
-                let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&sources=${string_of_news_sources}&pageSize=100&apiKey=${api_key}`
-                fetch(url)
-                    .then(res => res.json())
-                    .then(data => renderCards(data))
-            } else if (search_params.category !== null){
-                let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&category=${search_params.category}&pageSize=100&apiKey=${api_key}`
-                // debugger
-                fetch(url)
-                    .then(res => res.json())
-                    .then(data => renderCards(data))
+            debugger
+            if (search_params.endpoint === 'top-headlines'){
+                if (search_submitted.news_source) {
+                    let string_of_news_sources = search_params.news_source.join('\,')
+                    let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&sources=${string_of_news_sources}&pageSize=100&apiKey=${api_key}`
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => renderCards(data))
+                } else if (search_params.category !== null){
+                    let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&category=${search_params.category}&pageSize=100&apiKey=${api_key}`
+                    // debugger
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => renderCards(data))
+                } else {
+                    let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&pageSize=100&apiKey=${api_key}`    
+                    // debugger
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => renderCards(data))
+                }
             } else {
-                let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&pageSize=100&apiKey=${api_key}`    
-                // debugger
-                fetch(url)
-                    .then(res => res.json())
-                    .then(data => renderCards(data))
+                    let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&language=${search_params.lang}&sortBy=${search_params.sortBy}&pageSize=100&apiKey=${api_key}`
+                    debugger
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => renderCards(data))
             }
         }
 

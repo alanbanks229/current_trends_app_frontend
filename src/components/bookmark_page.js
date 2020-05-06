@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux"
 import BookmarkedNewsCards from "./BookmarkedCards.js"
+import NavBarContainer from '../containers/Navbar.js';
+
 import NewsCards from "./NewsCards.js"
 
-const BookmarkPage = ({user}) => {
+const BookmarkPage = (props) => {
 
     const user_bookmark_ids = useSelector(state => state.user_bookmark_ids)
     const currentUser = useSelector(state => state.current_user)
@@ -42,6 +44,8 @@ const BookmarkPage = ({user}) => {
     }
 
     return(
+        <>
+        <NavBarContainer props={props}/>
         <div className="NewsContainer">
             {cards ?
             <div className="total_num_bookmarks">
@@ -76,6 +80,7 @@ const BookmarkPage = ({user}) => {
             }
 
         </div>
+        </>
     )
 }
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import {useDispatch} from "react-redux"
-import {get_city_state} from "../../redux/CityState.js"
+
 
 class Login extends Component {
   constructor(props) {

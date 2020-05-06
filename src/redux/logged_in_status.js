@@ -24,6 +24,8 @@ export default function user_logged_reducer( value = null, action){
 
             //hacky way for now to prevent currentUser to default to null
             // I'm not even dispatching the event here how the hell is it getting here.
+        case "UPDATE_INPUT_FIELD_ACTION":
+            return value
         case "RETRIEVING_CITY_STATE":
             return value
         case "GOT_GOODS":

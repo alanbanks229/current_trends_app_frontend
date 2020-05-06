@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NavBarContainer from '../containers/Navbar.js';
 
-export default function About() {
+
+export default function About(props) {
 	return (
+		<>
+		<NavBarContainer props={props}/>
 		<div className="About">
 			<h2>Current-Trends</h2>
 			<div className="buttons">
@@ -38,5 +42,6 @@ export default function About() {
 			</div>
 			<div className="footer">Created with React, Redux, & Ruby on Rails... Powered By NEWS API</div>
 		</div>
+		</>
 	);
 }

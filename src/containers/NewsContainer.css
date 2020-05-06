@@ -5,11 +5,10 @@
 
 .NewsContainer {
     margin-top: 20px;
+    margin: auto;
+    width: 80%;
     text-align: center;
-    background-image: url('https://yogameditacao.com.br/wp-content/uploads/2018/06/minimalism_lines_background_band_light_46408_2048x1152.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    background-color: rgba(174, 213, 224, 0.835);
 }
 
 .NewsContainer .flex {

@@ -3,11 +3,29 @@
     text-align: center;
     width: 80%;
     display: block;
+    background: rgb(255, 255, 255);
     border: gray solid 3px;
+    overflow: hidden;
 }
 
-.header-nav-bar .logo{
+.left-float-li-items{
     float: left;
+    background: yellow;
+}
+
+.left-float-li-items .logo{
+    float: left!important;
+    align-items: flex-start;
+    max-width:100%;
+    height: 50px;
+}
+
+.left-float-li-items .about-li{
+    float: right!important;
+}
+
+.left-float-li-items ul{
+    list-style-type: none;
 }
 
 .header-nav-bar ul{
@@ -26,15 +44,25 @@
 }
 
 .disabled-link{
-    border: black solid 3px;
+    border: blue solid 3px;
     display: block;
-    padding: 8px;
-    background-color: rgb(197, 0, 0);
+    padding-left: 2px;
+    padding-right: ;
+    background-color: rgb(0, 0, 0);
+}
+
+
+
+.disabled-link .get_local_news_btn{
+    align-items:center!important;
+    padding: 3px;
 }
 
 .disabled-link:hover{
-    background-color: rgb(4, 0, 235);
+    background-color: rgba(158, 158, 158, 0.753);
 }
+
+
 
 /* This is the paragraph tag inside localnewsbtn */
 .header-nav-bar li .Local_news_hidden{
@@ -43,8 +71,13 @@
     margin-bottom: auto;
 }
 
-.header-nav-bar li a:hover {
+.right-li-ul-items li a:hover {
     background-color: rgb(4, 0, 235);
+}
+
+.right-li-ul-items .bookmark .button{
+    align-items:center!important;
+    /* padding-left: 10px; */
 }
 
 .header-nav-bar .sweet-loading{
@@ -52,9 +85,9 @@
     margin: 0 auto;
 }
 
-.header-nav-bar a{
-    border: black solid 3px;
+.right-li-ul-items a{
+    border: blue solid 3px;
     display: block;
-    padding: 8px;
-    background-color: rgb(197, 0, 0);
+    padding: 2px;
+    background-color: rgb(0, 0, 0);
 }

@@ -16,8 +16,6 @@ export const Home = (props) => {
   return (
   <>
       <NavBarContainer props={props}/>
-      <h1>Current Trends</h1>
-      <br></br>
       <ControlledForm />
       <FavoritesContainer />
       <br></br>

@@ -87,8 +87,12 @@ class SelectCountry extends React.Component {
   render() {
     return (
       <>
-      <p>Default: (USA)</p>
-      <Dropdown onChange={(event) => this.onInputChange(event, countryOptions)} placeholder='Select Country' options={countryOptions} search selection/>
+      {this.props.newsChecked ? 
+      (<><p style={{color: "red"}}>note: <br/>You cannot combine news source and country filter.<br/>Uncheck news source to filter by country</p>
+      <Dropdown placeholder='Select Country' disabled selection/></>)
+      : 
+      (<>
+      <Dropdown onChange={(event) => this.onInputChange(event, countryOptions)} placeholder='Select Country' options={countryOptions} search selection/></>)}
       </>
     )
   }

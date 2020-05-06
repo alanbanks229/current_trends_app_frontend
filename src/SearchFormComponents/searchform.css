@@ -1,0 +1,149 @@
+
+
+.SearchForm{
+    background-color: rgba(255, 255, 255, 0.76);
+    margin: 0 auto;
+    width: 80%;
+}
+
+.SearchForm .centerSearchBarDiv{
+    text-align: center;
+    margin-left: 6%;
+}
+
+.search_header{
+    padding-top: 5%;
+    text-align: center;
+}
+
+
+/*  THE  SEPARATE  DIVS   */
+.everything-filters-div{
+    -webkit-box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
+    -moz-box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
+    box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: silver solid 2px;
+    border-left: silver solid 2px;
+    float: right!important;
+}
+.top-headlines-filters-div{
+    margin-right: 4px!important;
+    -webkit-box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
+    -moz-box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
+    box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: silver solid 2px;
+    border-left: silver solid 2px;
+    float: left;
+}
+.top-headlines-filters-div-grayed{
+    margin-right: 4px!important;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: silver solid 2px;
+    border-right: silver solid 2px;
+    float: left;
+    /* background-color: rgba(197, 197, 197, 0.828); */
+    opacity: 0.5
+}
+.everything-filters-div-grayed{
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: silver solid 2px;
+    border-left: silver solid 2px;
+    float: right!important;
+    /* background-color: rgb(0, 0, 0); */
+    opacity: 0.5
+}
+
+/* THE  SEPARATE  DIVS */
+
+
+.direct_container_top_headlines_filters{
+    float: left;
+}
+
+.direct_container_everything_filters label{
+    overflow: hidden;
+    display: inline-flex;
+    margin-left: 220%;
+}
+
+.outer_div_containing_both_filter_properties{
+    display: inline-block;
+    background-color: rgba(51, 126, 224, 0.801);
+}
+
+
+
+p .sortByHeader {
+    float:right;
+}
+
+
+.MuiExpansionPanel-root{
+    margin: 0 auto!important;
+    background-color: rgb(226, 222, 207)!important;
+    width: 15%;
+}
+
+.MuiExpansionPanelSummary-expandIcon{
+    /* position: relative!important; */
+    color: red!important;
+    float: right!important;
+}
+.MuiExpansionPanelSummary-root{
+    /* width: 100%!important; */
+}
+.MuiExpansionPanel-root{
+    animation-duration: 1s;
+    animation-name: contract;
+    animation-fill-mode: forwards;
+}
+
+/* This is the literal filters bar button*/
+.Mui-expanded{
+    animation-duration: 1s;
+    animation-name: expand;
+    animation-fill-mode: forwards;
+}
+
+.inlineblockfilterbutton{
+    display: inline-block
+}
+
+.float_me_right{
+    float: right!important;
+}
+
+@keyframes contract {
+    from {
+        width: 70%;
+    } to {
+        width: 15%;
+    }
+}
+
+@keyframes expand {
+    from {
+        width: 15%;
+    } to {
+        width: 70%;
+    }
+}
+
+.MuiExpansionPanelDetails-root{
+    background-color: rgba(207, 207, 207, 0.541)!important;
+    width: 100%;
+}
+.MuiCollapse-wrapper{
+    background-color: rgb(0, 213, 255)!important;
+    width: 100%;
+}
+

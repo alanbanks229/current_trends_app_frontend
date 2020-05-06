@@ -39,6 +39,7 @@ const App = (props) => {
   }
 
   const handleLogin = (data) => {
+    debugger
     if (data.status === "created"){
       isLoggedInSet(true)
       userSet(data.user)
