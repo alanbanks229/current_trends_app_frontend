@@ -191,7 +191,7 @@ const NavBarContainer = (props) => {
                                         </div>
                                       </Link>
                                   </li>) : 
-                                  (<li>
+                                  (<li className='localnewsbtn'>
                                     <div className='disabled-link'>
                                       <Button animated>
                                         <Button.Content visible>Local{NewsPaperIcon()}</Button.Content>
