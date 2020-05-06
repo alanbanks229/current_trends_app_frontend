@@ -194,7 +194,7 @@ export default function ControlledForm() {
                                         <label>
                                             <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
                                             <br/>
-                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (USA)</em><br/>
+                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (United States)</em><br/>
                                             
                                         </label>
                                         <br/>
@@ -211,6 +211,7 @@ export default function ControlledForm() {
                                             {subCategoryFilter ? (<input type="checkbox" className="news_source_btn" disabled />): (<input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSourceFilter(event)}/>)}
                                         </label>
                                         {newsSourceFilter ? (<SelectNewsSources updateNewsSource={updateNewsSource}/>): (null)}
+                                        <br/>
                                         <br/>
                                         <br/>
                                     </div>
@@ -250,7 +251,7 @@ export default function ControlledForm() {
                                         <label>
                                             <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
                                             <br/>
-                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (USA)</em><br/>
+                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (United States)</em><br/>
                                             
                                         </label>
                                         <br/>

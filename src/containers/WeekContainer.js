@@ -6,15 +6,16 @@ import './weekcontainer.css'
 
 
 const WeekContainer = () => {
-    let user_zip = '20854'
+    
 
     const [ fullData, fullDataSet ] = useState([])
     const [ dailyData, dailyDataSet ] = useState([])
     const [ degreeType, degreeTypeSet ] = useState("fahrenheit")
-    const userLocation = useSelector(state => state.user_location)
+    const user = useSelector(state => state.user_location)
     useEffect(() => {
+        if (user){
         const weatherURL =
-        `http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=c9342df25e8b5f3a009b16e47b57dd8d`
+        `http://api.openweathermap.org/data/2.5/forecast?zip=${user.zip}&units=imperial&APPID=c9342df25e8b5f3a009b16e47b57dd8d`
     
         fetch(weatherURL)
         .then(res => res.json())
@@ -23,7 +24,7 @@ const WeekContainer = () => {
           debugger
           fullDataSet(data.list)
           dailyDataSet(DailyData)
-        })},[])
+        })}},[user])
 
     const updateForecastDegree = event => {
         degreeTypeSet(event.target.value)
@@ -34,15 +35,16 @@ const WeekContainer = () => {
     }
 
     return (
-        <div className="container">
-        <h5 className="display-5 text-muted">New York, US (5-day, forecast)</h5>
+        <>
+        {user ? (<div className="container">
+        <h5 className="display-5">{user.city}, {user.state} (5-day forecast)</h5>
         <DegreeToggle degreeType={degreeType} updateForecastDegree={updateForecastDegree}/>
           <div className="row justify-content-center">
   
             {formatDayCards()}
   
           </div>
-        </div>
+        </div>) : (null)}</>
       )
 
 }

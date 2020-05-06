@@ -9,7 +9,7 @@ import './navbar.css'
 import { Button, Icon } from 'semantic-ui-react'
 import { css } from "@emotion/core";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import logo_img from './current_trends_logojpg.jpg'
+import logo_img from './final_logo.jpg'
 import WeekContainer from './WeekContainer';
 
 const NavBarContainer = (props) => {
@@ -123,6 +123,14 @@ const NavBarContainer = (props) => {
         <div className="header-nav-bar">
           <div className="left-float-li-items">
           <ul>
+            <li className="weather-btn-li">
+            <Button animated>
+              <Button.Content visible><Icon size='large' name='cloud' /></Button.Content>
+              <Button.Content hidden>
+                local forecast
+              </Button.Content>
+            </Button>
+            </li>
             <li className="about-li">
               <Link to='/about'> <Button size='large'>About</Button> </Link>
             </li>
@@ -159,7 +167,7 @@ const NavBarContainer = (props) => {
                                     <div className="local_news_ready_div">
                                     <Link to='/local_news'>
                                       <Button animated>
-                                        <Button.Content visible>Local{NewsPaperIcon()}</Button.Content>
+                                        <Button.Content visible><p>Local</p>{NewsPaperIcon()}</Button.Content>
                                         <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
                                         <i class="arrow alternate circle right outline icon large"></i>
                                         </Button.Content>
@@ -195,7 +203,7 @@ const NavBarContainer = (props) => {
                                   (<li className='localnewsbtn'>
                                     <div className='disabled-link'>
                                       <Button animated>
-                                        <Button.Content visible>Local{NewsPaperIcon()}</Button.Content>
+                                        <Button.Content visible><span>Local</span>{NewsPaperIcon()}</Button.Content>
                                         <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
                                             Calibrate
                                         </Button.Content>
@@ -210,13 +218,28 @@ const NavBarContainer = (props) => {
                       </> 
                                 : 
                                 <> 
-                                  <ul>
-                                    <li className="login"><Link to='/login'>Log in</Link></li>
-                                    <li className="signup"><Link to='/signup'>Sign Up</Link></li>
+                                  <ul className="right-li-ul-items">
+                                  <li className="login">
+                                    <Link to='/login'>
+                                      <Button size='large'>Login</Button>
+                                    </Link>
+                                  </li>
+
+                                  <li className="signup">
+                                  <Link to='/signup'>
+                                      <Button animated>
+                                        <Button.Content visible> <Icon size='large' name='add user'/> </Button.Content>
+                                        <Button.Content hidden>
+                                            Sign Up!
+                                        </Button.Content>
+                                      </Button>
+                                  </Link>
+                              </li>
                                     
                                   </ul>
                                 </>
         }
+        
         <WeekContainer />
         <br/>
         { props.props.user ? <>

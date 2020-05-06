@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBarContainer from '../containers/Navbar.js';
-
+import './about.css'
 
 export default function About(props) {
 	return (
@@ -14,27 +14,22 @@ export default function About(props) {
 			<div className="about">
 				<h2>About . . . </h2>
 				<p>
-					Welcome to <b>Draw-Off</b>, an application where you and other users can have a friendly "draw off"
-					contest and see who can draw the best picture:<br /> </p>
-					<p style={{fontSize: 13, textAlign: "center"}}>(Which will be based upon the number of upvotes a drawing
-					receives from their peers!)</p>
+				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
 				<br />
 				<div>
 					<h3>How to Begin?</h3>
 					<p>
-						If you haven't already,sign up and create an account to get started!<br/>
-						After doing so, you can either <em>"host"</em> or <em>"join"</em> a room by clicking on the <b>menu</b> tab
-						(top-left) and clicking <b>"Create or Join Room"</b>
+					At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio
 					</p>
 					<br />
 					<h3>Quick Notes:</h3>
 					<ul>
-						<li>In order to join a room you must know the Host's room number in order to enter!</li>
+						<li>IItaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur</li>
 						<li>
-							There is a limit on how many users can be in a lobby, <i>specified by the host</i>
+						Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur
 						</li>
 						<li>
-							When the Game begins you have a time limit to draw your prompt <i>gotta go fast</i>
+						Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur
 						</li>
 						<br />
 					</ul>
