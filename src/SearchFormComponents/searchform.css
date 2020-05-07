@@ -80,7 +80,13 @@
     background-color: rgba(51, 126, 224, 0.801);
 }
 
-
+.everything-filters-div label input #lang_btn{
+    border: black solid 3px!important;
+    height: 25px!important;
+    width: 25px!important;
+    background-color: red!important;
+    padding: 0px!important;
+}
 
 p .sortByHeader {
     float:right;

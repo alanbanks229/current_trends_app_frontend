@@ -4,5 +4,5 @@
     margin: auto;
     padding: 20px;
     border-style: solid;
-    border-color: rgba(201, 76, 76, 0.425);
+    border: rgb(0, 0, 0) solid 1px;
 }

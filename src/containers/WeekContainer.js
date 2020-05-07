@@ -12,11 +12,12 @@ const WeekContainer = ({hide}) => {
     const [ dailyData, dailyDataSet ] = useState([])
     const [ degreeType, degreeTypeSet ] = useState("fahrenheit")
     const user = useSelector(state => state.user_location)
+    const lat = useSelector(state => state.coordinates.lat)
+    const long = useSelector(state => state.coordinates.long)
     useEffect(() => {
         if (user){
         const weatherURL =
-        `http://api.openweathermap.org/data/2.5/forecast?zip=${user.zip}&units=imperial&APPID=c9342df25e8b5f3a009b16e47b57dd8d`
-    
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=imperial&APPID=c9342df25e8b5f3a009b16e47b57dd8d`
         fetch(weatherURL)
         .then(res => res.json())
         .then(data => {

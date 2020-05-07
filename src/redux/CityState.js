@@ -1,6 +1,7 @@
 export function get_city_state(json_result){
     let user_location;
-    if (json_result.localityInfo){
+    if (json_result !== null) {
+        if (json_result.localityInfo){
             user_location = {
             county: json_result.localityInfo["administrative"][2].name,
             city: json_result.locality,
@@ -20,6 +21,13 @@ export function get_city_state(json_result){
         type: "RETRIEVING_CITY_STATE",
         payload: user_location
     }
+    } else {
+        return {
+            type: "RETRIEVING_CITY_STATE",
+            payload: null
+        }
+    }
+
 }
 
 export default function city_state_Reducer(state = null, action){

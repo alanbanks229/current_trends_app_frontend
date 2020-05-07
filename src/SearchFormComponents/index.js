@@ -88,20 +88,25 @@ export default function ControlledForm() {
         subCategoryFilterSet(!subCategoryFilter)
     }
 
+    const updateCategory = (user_selection) => {
+        // debugger
+        categorySet(user_selection)
+    }
+
     const updateLangFilter = (event) => {
+        debugger
         if (event.target.checked === false){
             langSet('')
         }
         langFilterSet(!langFilter)
     }
 
-    const updateCategory = (user_selection) => {
-        // debugger
-        categorySet(user_selection)
+    const updateLang = (user_selection) => {
+        langSet(user_selection)
     }
 
     const updateNewsSourceFilter = (event) => {
-        // debugger
+        debugger
         if (event.target.checked === true){
             countrySet('')
             newsSourceCheckedSet(true)
@@ -182,14 +187,16 @@ export default function ControlledForm() {
                                         </label>
                                         <br/>
                                         <br/>
-                                        <label>
                                             <b>Filter by language</b>
-                                            <input type="checkbox" className="lang_btn" onChange={(event) => updateLangFilter(event)}/> 
-                                            {langFilter ? (<SelectLanguage langSet={langSet}/>) : (<br/>)}
+                                            <input type="checkbox" id="lang_btn" onClick={(event) => updateLangFilter(event)}/> 
+                                            {langFilter ? 
+                                            (<><br/><SelectLanguage langSet={updateLang}/></>) :
+                                             (<br/>)}
                                             <br />
                                             <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (all languages)</em><br/><br/>
-                                        </label>
                                 </div>
+
+
                                     <div className="top-headlines-filters-div">
                                         <label>
                                             <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
@@ -200,11 +207,15 @@ export default function ControlledForm() {
                                         <br/>
                                         <label>
                                             <b>Filter by sub-category</b> (optional)
-                                            {newsSourceChecked ? (<input type="checkbox" id="subcategoryBtn" disabled/>): (<input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>)}
+                                            {newsSourceChecked ? 
+                                            (<input type="checkbox" id="subcategoryBtn" disabled/>): 
+                                            (<input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>)}
                                             
                                         </label>
                                         <br></br>
-                                        {subCategoryFilter ? (<SelectSubcategory updateCateg={updateCategory}/>): (null)}
+                                        {subCategoryFilter ? 
+                                        (<SelectSubcategory updateCateg={updateCategory}/>):
+                                         (null)}
                                         <br/>
                                         <label>
                                             <b>Filter by news-source</b> (optional)
@@ -237,13 +248,13 @@ export default function ControlledForm() {
                                         </label>
                                         <br/>
                                         <br/>
-                                        <label>
+                                        
                                             <b>Filter by language</b>
-                                            <input type="checkbox" className="lang_btn" onChange={(event) => updateLangFilter(event)}/> 
-                                            {langFilter ? (<SelectLanguage langSet={langSet}/>) : (<br/>)}
+                                            <input type="checkbox" id="lang_btn" onClick={(event) => updateLangFilter(event)}/>
+                                            {langFilter ? (<><br/><SelectLanguage langSet={updateLang}/></>) : (<br/>)}
                                             <br />
                                             <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (all languages)</em><br/><br/>
-                                        </label>
+                                        
                                 </div>
                                 {/* </li>
                                 <li className="top-headlines-filters-li-grayed"> */}

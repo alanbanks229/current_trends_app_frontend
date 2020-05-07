@@ -5,10 +5,11 @@ import missing_img from './no-image-available-grid.png';
 import {new_bookmark_action, remove_bookmark_action} from '../redux/bookmarks.js'
 import swal from '@sweetalert/with-react';
 import './cancelbookmark_alertbox.css'
+import moment from 'moment';
 
 function Local_News_Card(props){
 
-
+    const time = moment(props.date_published || moment.now()).fromNow();
     const [ img_ready, img_readySet ] = useState(false)
     const [ bookmarked, bookmarkedSet ] = useState(false)
     const [ bookmark_id, bookmark_id_Set ] = useState(null)
@@ -112,7 +113,7 @@ function Local_News_Card(props){
                 }
             <br></br>
             <div className="img_caption">
-                <p className="published_data">Published at: {props.date_published}</p>
+                <p className="published_data">Published {time}</p>
             </div>
             <div className="card-body">
                 <h2 className="article_title">{props.article_title}</h2>

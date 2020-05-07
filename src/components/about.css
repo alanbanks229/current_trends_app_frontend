@@ -1,5 +1,48 @@
-div .about{
+div .About{
     margin-top: 10%;
+    margin: 0 auto;
+    width: 70%;
+    background: rgba(255, 255, 255, 0.924);
+}
+
+.About h1{
+    padding-top: 20px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.705);
+}
+
+.About p{
+    text-align:center;
+}
+
+.about p {
+    font-size: 18px;
+    padding: 26px;
+}
+
+.about h2{
+    text-align: center;
+}
+
+.functionality_app h2{
+    text-align: center;
+}
+
+.functionality_app p {
+    font-size: 17px;
+}
+
+.quick_notes_usage h2{
+
+    text-align: center;
+
+}
+
+.quick_notes_usage li {
+    padding: 20px;
+    font-size: 16px;
+}
+
+.footer {
+    text-align: center;
+    padding-bottom: 30px;
 }

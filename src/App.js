@@ -11,6 +11,7 @@ import LocalNewsPage from './components/local_news'
 import BookmarksPage from './components/bookmark_page'
 import {user_logged_in_action, user_logged_out_action} from './redux/logged_in_status.js'
 import {retrieve_user_bookmarks} from './redux/bookmarks.js'
+import {get_city_state} from "./redux/CityState.js"
 
 // import './App.css';
 
@@ -39,7 +40,6 @@ const App = (props) => {
   }
 
   const handleLogin = (data) => {
-    debugger
     if (data.status === "created"){
       isLoggedInSet(true)
       userSet(data.user)
@@ -57,6 +57,7 @@ const App = (props) => {
     isLoggedInSet(false)
     userSet(null)
     dispatch(user_logged_out_action())
+    dispatch(get_city_state(null))
   }
 
     const currentSubmission = useSelector(state => state.submitted)

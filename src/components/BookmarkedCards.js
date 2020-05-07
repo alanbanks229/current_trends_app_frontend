@@ -7,6 +7,7 @@ import swal from '@sweetalert/with-react';
 import './NewsCard.css'
 import '../containers/NewsContainer.css'
 import './cancelbookmark_alertbox.css'
+import moment from 'moment';
 
 
 function BookmarkedCards(props){
@@ -19,7 +20,7 @@ function BookmarkedCards(props){
         img_readySet(true)
     }
     const [ removedBookmark, removedBookmarkSet ] = useState(false)
-
+    const time = moment(props.published || moment.now()).fromNow();
 
     function ConfirmDelete(){
 
@@ -94,7 +95,7 @@ function BookmarkedCards(props){
 
                 <br></br>
                 <div className="img_caption">
-                    <p className="published_data">Published at: {props.published}</p>
+                    <p className="published_data">Published {time}</p>
                 </div>
                 <div className="card-body">
                     <h2 className="article_title">{props.title}</h2>
@@ -102,7 +103,7 @@ function BookmarkedCards(props){
                     <br></br>
                 </div>
                 <div className="button">
-                    <button onClick={ConfirmDelete} className="news_card_button">Remove {props.userbookmark_id}</button>
+                    <button onClick={ConfirmDelete} className="news_card_button">Remove</button>
                 </div>
             </div>
             )

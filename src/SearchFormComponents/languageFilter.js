@@ -28,6 +28,7 @@ class SelectLanguage extends React.Component {
   }
 
   onInputChange(event, languages) {
+    
     var match;
     if (event.target.textContent){
       match = languages.filter( country_obj => country_obj.text === (event.target.textContent))

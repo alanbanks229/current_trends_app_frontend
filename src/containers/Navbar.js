@@ -11,6 +11,7 @@ import { css } from "@emotion/core";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import logo_img from './final_logo.jpg'
 import WeekContainer from './WeekContainer';
+import swal from '@sweetalert/with-react';
 
 const NavBarContainer = (props) => {
 
@@ -83,6 +84,23 @@ const NavBarContainer = (props) => {
         .then(json => loadingSet(false))
       }
     }
+
+    const calibrateLocationFirst = () => {
+      swal({
+        text: "You cannot access weather yet: (See Below)",
+        icon: "error",
+        buttons: {
+          cancel: "Close",
+        },
+        content: (
+          <div>
+            <br/>
+            <p>In order to see your local weather, this app needs access to your approximate location.</p>
+            <p>This can be done by clicking the <b>local news icon</b> in the <b>top right navbar</b> when you are logged in!</p>
+          </div>
+        )
+      })
+    }
   
     const getUserLocation = (event) => {
       //If user location is already defined we should not run this function, instead render news
@@ -128,7 +146,27 @@ const NavBarContainer = (props) => {
         <div className="header-nav-bar">
           <div className="left-float-li-items">
           <ul>
-            <li className="weather-btn-li" onClick={userClickedDisplayWeather}>
+            
+            { userLocation ? (<><li className="weather-btn-li" onClick={userClickedDisplayWeather}>
+            <Button animated>
+              <Button.Content visible><Icon size='large' name='cloud' /></Button.Content>
+              <Button.Content hidden>
+                local forecast
+              </Button.Content>
+            </Button>
+            </li>
+            <li className="about-li">
+              <Link to='/about'> <Button size='large'>About</Button> </Link>
+            </li>
+            <li className="logo-li">
+              <Link to='/'> <button><img src={logo_img} className="logo"/></button></Link>
+            </li></>) 
+            
+            : 
+            
+            (<>
+            
+            <li className="weather-btn-li" onClick={calibrateLocationFirst}>
             <Button animated>
               <Button.Content visible><Icon size='large' name='cloud' /></Button.Content>
               <Button.Content hidden>
@@ -142,6 +180,10 @@ const NavBarContainer = (props) => {
             <li className="logo-li">
               <Link to='/'> <button><img src={logo_img} className="logo"/></button></Link>
             </li>
+            
+            </>) }
+            
+            
           </ul>
           </div>
         { currentUser ? <> 
@@ -248,13 +290,14 @@ const NavBarContainer = (props) => {
                           <h3 className="welcome_user">Welcome {props.props.user.username}</h3>
                       </> 
                       : null }
-        { displayWeather ? 
+        { userLocation ? (( displayWeather ? 
         (<>
             <WeekContainer hide={displayWeather}/>
           </>
           ) 
           : 
-          (<><WeekContainer hide={displayWeather} /></>)}
+          (<><WeekContainer hide={displayWeather} /></>))) : (null) }
+        
           </div>
         </>
     )

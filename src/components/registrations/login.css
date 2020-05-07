@@ -1,0 +1,36 @@
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: rgba(221, 221, 221, 0.904);
+    outline: none;
+  }
+
+
+  .login_container {
+    text-align: left;
+    width: 30%;
+    padding: 16px;
+    border-radius: 10%;
+    background-color: rgba(253, 242, 204, 0.931);
+  }
+
+  .div_holding_login_form{
+      margin-top: 50px;
+      margin-left: 40%;
+  }
+
+  .login_input_inline{
+      display: inline-block;
+  }
+
+  .login_input_text_field{
+      margin-right: 10px;
+      margin-left: 10px;
+  }

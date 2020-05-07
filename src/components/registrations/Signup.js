@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import swal from '@sweetalert/with-react';
 import './signup.css'
+import {Link} from 'react-router-dom'
 
 
 class Signup extends Component {
@@ -79,58 +80,77 @@ handleErrors = () => {
 render() {
     const {username, email, password, password_confirmation} = this.state
 return (
-  <>
-      <div>
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input 
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password confirmation"
-            type="password"
-            name="password_confirmation"
-            value={password_confirmation}
-            onChange={this.handleChange}
-          />
-        
-          <button placeholder="submit" type="submit">
-            Sign Up
-          </button>
-      
-        </form>
-        <div>
-          {
-            this.state.errorsExist ? this.handleErrors() : null
-          }
-          {
-            this.state.errors ? (      <div>
-              <ul>{this.state.errors.map((error) => {
-                return <li key={error}>{error}</li>
-              })}</ul> 
-            </div>) : (null)
-          }
-        </div>
-      </div>
+<>
+
+        <>
+      <form onSubmit={this.handleSubmit}>
+          <div className="container">
+
+            <div className="signup_header_div">
+              <h1>Register</h1>
+              <p>Please fill in this form to create an account.</p>
+              <>
+                {
+                  this.state.errorsExist ? this.handleErrors() : null
+                }
+                {
+                  this.state.errors ? (      <div>
+                    <ul>{this.state.errors.map((error) => {
+                      return <li className="li-signup-errors" key={error}>{error}</li>
+                    })}</ul> 
+                  </div>) : (null)
+                }
+              </>
+            </div>
+            <>
+              <hr/>
+              <label for="username"><b>Username</b></label>
+              <input
+                placeholder="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={this.handleChange}
+              />
+              <label for="email"><b>Email</b></label>
+              <input
+                placeholder="email"
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+              <label for="password"><b>Password</b></label>
+              <input 
+                placeholder="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+              <label for="password_confirmation"><b>Password Confirmation</b></label>
+              <input
+                placeholder="password confirmation"
+                type="password"
+                name="password_confirmation"
+                value={password_confirmation}
+                onChange={this.handleChange}
+              />
+              <hr/>
+              <div className="div-with-submit">
+              <button placeholder="submit" type="submit" className="registerbtn">
+                Sign Up
+              </button>
+              </div>
+              <div class="container signin">
+                <p>Already have an account? <Link to="/login">Login</Link></p>
+                <Link to="/about">About</Link>
+              </div>
+            </>
+          </div>
+      </form>
       </>
+</>
     );
   }
 }
