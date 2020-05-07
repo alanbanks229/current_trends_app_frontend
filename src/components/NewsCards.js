@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from "react-redux"
-import './NewsCard.css'
+// import './NewsCard.css'
 import '../containers/NewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 import {new_bookmark_action, remove_bookmark_action} from '../redux/bookmarks.js'
 import swal from '@sweetalert/with-react';
 import './cancelbookmark_alertbox.css'
+import moment from 'moment';
 
 function News_Card(props){
 
@@ -18,7 +19,7 @@ function News_Card(props){
         img_readySet(true)
     }
     const dispatch = useDispatch()
-
+    const time = moment(props.published || moment.now()).fromNow();
     //goal is to create NEW fetch request to bookmarks
     //Bookmark will have a user_id and card_info
     function createBookMark() {
@@ -113,8 +114,8 @@ function News_Card(props){
             }
             <br></br>
             <div className="img_caption">
-                {props.author ? <p className="author">By: {props.author}</p>: <p>provided by {props.source}</p>}
-                <p className="published_data">Published at: {props.published}</p>
+                {props.author ? (<p className="author"><b>By: {props.author}</b></p>): (<p><b>provided by {props.source}</b></p>)}
+                <p className="published_data"><b>Published {time}</b></p>
             </div>
             <div className="card-body">
                 <h2 className="article_title">{props.title}</h2>

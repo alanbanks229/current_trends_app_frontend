@@ -8,7 +8,7 @@
     margin: auto;
     width: 80%;
     text-align: center;
-    background-color: rgba(174, 213, 224, 0.835);
+    background-color: rgba(255, 255, 255, 0.664)!important;
 }
 
 .NewsContainer .flex {
@@ -47,19 +47,29 @@ header {
 
 .card-header h4 {
     font-size: 24px;
-    color: orange;
-    border: red solid 3px;
+    font-family: "Times New Roman", Times, serif;
+    margin-left: 40px!important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+    color: black!important;
+    border: black solid 1px!important;
+    /* -webkit-box-shadow: 4px 6px 39px 27px rgba(168,168,168,0.64)!important;
+    -moz-box-shadow: 4px 6px 39px 27px rgba(168,168,168,0.64)!important;
+    box-shadow: 4px 6px 39px 27px rgba(168,168,168,0.64)!important;   */
 }
 
 .card-body {
     display: inline-block;
-    border: blue solid 3px;
+    border: black solid 1px!important;
+    background-color: white;
+	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 2.2px 2.2px rgba(0, 0, 0, 0.048), 0 5.5px 5px rgba(0, 0, 0, 0.06),
+		0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
 .img_caption p{
     display: inline-block;
     vertical-align: top;
-    border: green solid 3px;
+    border: none!important;
 }
 
 .img_caption p.author{
@@ -70,7 +80,7 @@ header {
     float: right;
 }
 img {
-    border: rgb(255, 1, 162) solid 2px;
+    /* border: rgb(255, 1, 162) solid 2px; */
 }
 .card-body h2 {
     text-align: center;

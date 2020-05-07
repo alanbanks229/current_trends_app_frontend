@@ -40,6 +40,7 @@ const BookmarkPage = (props) => {
     }
 
     function renderCards(data){
+        debugger
         cardsSet(data)
     }
 
@@ -57,8 +58,22 @@ const BookmarkPage = (props) => {
 
             {cards ?
             <div className="flex">
-                {cards.map((article, i) =>
-                    (
+                {cards.map((article, i) => ( article.article_data.hasOwnProperty('image') ? (
+                        <BookmarkedNewsCards 
+                        source={article.article_data.provider[0].name}
+                        source_provider_img_url={article.article_data.provider[0].image.thumbnail.contentUrl}
+                        author={""}
+                        title={article.article_data.name}
+                        desc={article.article_data.description}
+                        url={article.article_data.url}
+                        image={article.article_data.image.contentUrl}
+                        published={article.article_data.datePublished}
+                        content={""}
+                        bookmark_id={article.id}
+                        userbookmark_id={article.match_id[0]}
+                        article={article.article_data}
+                        />
+                    ) : (
                         <BookmarkedNewsCards 
                         source={article.article_data.source.name}
                         author={article.article_data.author}
@@ -71,9 +86,14 @@ const BookmarkPage = (props) => {
                         bookmark_id={article.id}
                         userbookmark_id={article.match_id[0]}
                         article={article.article_data}
-                        // key={i}
                         />
-                    ))}
+                    )
+                    
+                    
+                    )
+                    
+                    
+                )}
             </div>
             :
             <div>Look like there's nothing here, bookmark some cards to see them here!</div>

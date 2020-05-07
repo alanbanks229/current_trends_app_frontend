@@ -67,7 +67,7 @@ function BookmarkedCards(props){
     }
 
     console.log("The Card is: ", props.article)
-
+    let has_src_img = props.hasOwnProperty('source_provider_img_url')
     return(
         <>
             {removedBookmark ? 
@@ -77,7 +77,7 @@ function BookmarkedCards(props){
             <div className='NewsCard' id={props.id}>
                 <header className="card-header">
                     
-                    {/* <img src={props.source_provider_img_url} className="source_provider_img"/> */}
+                     { has_src_img ? (<img src={props.source_provider_img_url} className="source_provider_img"/>) : (null) }
                     <h4 className="card-header-title">{props.source}</h4>
                     <a href={props.url} target="_blank" rel="noopener noreferrer">Link Source</a>
                 </header>
