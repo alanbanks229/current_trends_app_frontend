@@ -19,7 +19,7 @@ const DayCard = ({ reading, degreeType }) => {
         <i className={imgURL}></i>
         <h2>{degreeType === "celsius" ? celsius + "°C" : fahrenheit + "°F"}</h2>
         <div className="card-body">
-          <p className="card-text">{reading.weather[0].description}</p>
+          <b className="card-text">{reading.weather[0].description}</b>
         </div>
       </div>
     </div>

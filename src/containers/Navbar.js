@@ -22,12 +22,13 @@ const NavBarContainer = (props) => {
     const currentSubmission = useSelector(state => state.submitted)
     const userLocation = useSelector(state => state.user_location)
     const currentUser = useSelector(state => state.current_user)
+    const [ displayWeather, displayWeatherSet ] = useState(false)
     const dispatch = useDispatch()
 
     const override = css`
       display: inline-block;
       margin: 0 auto;
-      border-color: #36D7B7;
+      border-color: linear-gradient(90deg, rgba(58,170,180,1) 0%, rgba(253,237,29,1) 50%, rgba(69,80,252,1) 100%);
     `;
     const IconExampleIconGroup = () => {
       return (
@@ -61,6 +62,10 @@ const NavBarContainer = (props) => {
           props.props.history.push('/')
         })
         .catch(error => console.log(error))
+    }
+
+    const userClickedDisplayWeather = () => {
+      displayWeatherSet(!displayWeather)
     }
 
     const send_user_location_backend = (data) => {
@@ -123,7 +128,7 @@ const NavBarContainer = (props) => {
         <div className="header-nav-bar">
           <div className="left-float-li-items">
           <ul>
-            <li className="weather-btn-li">
+            <li className="weather-btn-li" onClick={userClickedDisplayWeather}>
             <Button animated>
               <Button.Content visible><Icon size='large' name='cloud' /></Button.Content>
               <Button.Content hidden>
@@ -167,7 +172,7 @@ const NavBarContainer = (props) => {
                                     <div className="local_news_ready_div">
                                     <Link to='/local_news'>
                                       <Button animated>
-                                        <Button.Content visible><p>Local</p>{NewsPaperIcon()}</Button.Content>
+                                        <Button.Content visible><span>Local</span>{NewsPaperIcon()}</Button.Content>
                                         <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
                                         <i class="arrow alternate circle right outline icon large"></i>
                                         </Button.Content>
@@ -182,17 +187,17 @@ const NavBarContainer = (props) => {
                                     <PropagateLoader
                                       css={override}
                                       size={15}
-                                      color={"#36D7B7"}
+                                      color={"linear-gradient(90deg, rgba(58,170,180,1) 0%, rgba(253,237,29,1) 50%, rgba(69,80,252,1) 100%);"}
                                       loading={loading}
                                     />
                                   </div>
                                   ) : 
                                   ((userLocation ? (
-                                  <li>
+                                  <li className='localnewsbtn'>
                                       <Link to='/local_news'>
                                         <div className='disabled-link'>
                                         <Button animated>
-                                          <Button.Content visible>Local{NewsPaperIcon()}</Button.Content>
+                                          <Button.Content visible><span>Local</span>{NewsPaperIcon()}</Button.Content>
                                           <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
                                             <i class="arrow alternate circle right outline icon large"></i>
                                           </Button.Content>
@@ -239,14 +244,18 @@ const NavBarContainer = (props) => {
                                   </ul>
                                 </>
         }
-        
-        <WeekContainer />
-        <br/>
         { props.props.user ? <>
                           <h3 className="welcome_user">Welcome {props.props.user.username}</h3>
                       </> 
                       : null }
-        </div>
+        { displayWeather ? 
+        (<>
+            <WeekContainer hide={displayWeather}/>
+          </>
+          ) 
+          : 
+          (<><WeekContainer hide={displayWeather} /></>)}
+          </div>
         </>
     )
 }

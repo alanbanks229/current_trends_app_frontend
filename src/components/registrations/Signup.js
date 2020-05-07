@@ -13,7 +13,8 @@ class Signup extends Component {
       email: '',
       password: '',
       password_confirmation: '',
-      errors: ''
+      errors: '',
+      errorsExist: false,
      };
   }
 handleChange = (event) => {
@@ -39,7 +40,8 @@ handleSubmit = (event) => {
         this.redirect()
       } else {
         this.setState({
-          errors: response.data.errors
+          errors: response.data.errors,
+          errorsExist: true
         })
       }
     })
@@ -50,6 +52,7 @@ redirect = () => {
     this.props.history.push('/')
   }
 handleErrors = () => {
+  this.setState({errorsExist: false})
   swal({
     text: "Account Creation Error: (See Below)",
     icon: "error",
@@ -76,6 +79,7 @@ handleErrors = () => {
 render() {
     const {username, email, password, password_confirmation} = this.state
 return (
+  <>
       <div>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
@@ -115,10 +119,18 @@ return (
         </form>
         <div>
           {
-            this.state.errors ? this.handleErrors() : null
+            this.state.errorsExist ? this.handleErrors() : null
+          }
+          {
+            this.state.errors ? (      <div>
+              <ul>{this.state.errors.map((error) => {
+                return <li key={error}>{error}</li>
+              })}</ul> 
+            </div>) : (null)
           }
         </div>
       </div>
+      </>
     );
   }
 }

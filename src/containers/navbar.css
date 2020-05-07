@@ -205,6 +205,9 @@
     vertical-align: middle;
     transition: all 0.3s ease; 
 }
+
+
+
 .right-li-ul-items .signup button i{
     margin-right: 8px!important;
 }
@@ -226,5 +229,4 @@
 }
 
 .welcome_user{
-    line-height: 0%;
 }

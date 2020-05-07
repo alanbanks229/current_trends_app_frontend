@@ -5,7 +5,7 @@ import DegreeToggle from './DegreeToggle.js'
 import './weekcontainer.css'
 
 
-const WeekContainer = () => {
+const WeekContainer = ({hide}) => {
     
 
     const [ fullData, fullDataSet ] = useState([])
@@ -36,15 +36,28 @@ const WeekContainer = () => {
 
     return (
         <>
-        {user ? (<div className="container">
-        <h5 className="display-5">{user.city}, {user.state} (5-day forecast)</h5>
-        <DegreeToggle degreeType={degreeType} updateForecastDegree={updateForecastDegree}/>
-          <div className="row justify-content-center">
-  
-            {formatDayCards()}
-  
-          </div>
-        </div>) : (null)}</>
+        {user ? ( hide ? 
+          ((<><div className="weathercontainer">
+              <h5 className="display-5">{user.city}, {user.state} (5-day forecast)</h5>
+              <DegreeToggle degreeType={degreeType} updateForecastDegree={updateForecastDegree}/>
+              <br/>
+              <div className="row justify-content-center">
+    
+                  {formatDayCards()}
+    
+              </div>
+        </div></>)) : 
+
+        ((<><div className="weathercontainerHidden">
+          <h5 className="display-5">{user.city}, {user.state} (5-day forecast)</h5>
+          <DegreeToggle degreeType={degreeType} updateForecastDegree={updateForecastDegree}/>
+          <br/>
+            <div className="row justify-content-center">
+    
+              {formatDayCards()}
+    
+            </div>
+        </div></>)) )  : (null)}</>
       )
 
 }
