@@ -17,7 +17,7 @@ const WeekContainer = ({hide}) => {
     useEffect(() => {
         if (user){
         const weatherURL =
-        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=imperial&APPID=c9342df25e8b5f3a009b16e47b57dd8d`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=imperial&APPID=c9342df25e8b5f3a009b16e47b57dd8d`
         fetch(weatherURL)
         .then(res => res.json())
         .then(data => {
