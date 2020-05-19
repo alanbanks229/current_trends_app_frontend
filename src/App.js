@@ -25,7 +25,7 @@ const App = (props) => {
     loginStatus()
   }, [])
   
-  const loginStatus = () => {axios.get('http://localhost:3001/logged_in', {withCredentials: true})
+  const loginStatus = () => {axios.get('https://current-trends-app-api.herokuapp.com/login', {withCredentials: false})
       .then(response => {
         if (response.data.logged_in) {
           handleLogin(response)
