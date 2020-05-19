@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-
-import FavoritesContainer from "../containers/FavoritesContainer.js"
 import NewsContainer from "../containers/NewsContainer.js"
 import ControlledForm from "../SearchFormComponents"
 import {useSelector, useDispatch} from "react-redux"
@@ -18,7 +16,6 @@ export const Home = (props) => {
   <>
       <NavBarContainer props={props}/>
       <ControlledForm />
-      <FavoritesContainer />
       <br></br>
       <NewsContainer search_submitted={currentSubmission}/>
   </>

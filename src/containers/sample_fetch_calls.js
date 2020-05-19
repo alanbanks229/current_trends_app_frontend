@@ -1,6 +1,7 @@
 
 //Look at X-Search-Location query parameter... instead of hardcoding the string 'Potomac, MD' Bing's news search API can give me local news given coordinates.
 
+// This file is just used for a reference to make the fetch calls I will use in the app
 
 const api = '5d94a4280599426498934113df289233';
 const requestHeaders = {

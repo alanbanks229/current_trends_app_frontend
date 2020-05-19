@@ -14,6 +14,9 @@ export function user_logged_out_action(){
 
 //For some reason this reducer is getting called after I submit search form...
 //this is bad because the current user is returning to null if they are already logged in.
+
+//hacky way for now to prevent currentUser to default to null
+// I'm not even dispatching the event here how the hell is it getting here.
 export default function user_logged_reducer( value = null, action){
     debugger
     switch(action.type){
@@ -21,14 +24,13 @@ export default function user_logged_reducer( value = null, action){
             return action.payload
         case "LOGGED_OUT":
             return null
-
-            //hacky way for now to prevent currentUser to default to null
-            // I'm not even dispatching the event here how the hell is it getting here.
         case "UPDATE_INPUT_FIELD_ACTION":
             return value
         case "RETRIEVING_CITY_STATE":
             return value
         case "GOT_GOODS":
+            return value
+        case "UNAVAILABLE":
             return value
         case "SUBMIT_QUERY":
             return value
@@ -37,6 +39,8 @@ export default function user_logged_reducer( value = null, action){
         case "REMOVE_BOOKMARK":
             return value
         case "RETRIEVED_BOOKMARKS":
+            return value
+        case "UPDATE_FILTER":
             return value
         default:
             return null

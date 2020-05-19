@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import NavBarContainer from '../containers/Navbar.js';
 import './about.css'
 

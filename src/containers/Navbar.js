@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {useSelector, useDispatch} from "react-redux"
@@ -57,7 +57,8 @@ const NavBarContainer = (props) => {
       )
     }
     const handleClick = () => {
-        axios.delete('http://localhost:3001/logout', {withCredentials: true})
+      // https://current-trends-app-api.herokuapp.com/ http://localhost:3001/logout
+        axios.delete('https://current-trends-app-api.herokuapp.com/logout', {withCredentials: true})
         .then(response => {
           props.props.handleLogout()
           props.props.history.push('/')
@@ -72,7 +73,8 @@ const NavBarContainer = (props) => {
     const send_user_location_backend = (data) => {
       if (currentUser){
         var userId = currentUser.id
-        fetch(`http://localhost:3001/users/${userId}`, {
+        // http://localhost:3001/users/${userId}
+        fetch(`https://current-trends-app-api.herokuapp.com/users/${userId}`, {
           method: 'PATCH',
           headers:  {
             "Content-Type": "application/json",
@@ -216,7 +218,7 @@ const NavBarContainer = (props) => {
                                       <Button animated>
                                         <Button.Content visible><span>Local</span>{NewsPaperIcon()}</Button.Content>
                                         <Button.Content hidden onClick={(event) => getUserLocation(event)} className="get_local_news_btn">
-                                        <i class="arrow alternate circle right outline icon large"></i>
+                                        <p>Go <i class="arrow alternate circle right outline icon large"></i> </p>
                                         </Button.Content>
                                       </Button>
                                       </Link>

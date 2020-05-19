@@ -6,42 +6,28 @@ const NewsContainer = ({search_submitted, user_location}) => {
 
     // theoretically what I found is if I wanted to show pages of results I need some kind of state to keep track
     // of in order to do that... News API has a page query parameter, and to get access to the next result I would theoritically
-    // have to make another fetch request to page=2 which is stupid af... 
+    // have to make another fetch request to page=2
 
     // so maybe its best ot make it so that I try to limit it to 100 pages maximum and thats it... and creates 5 pages of 20 based on top 100...
 
-    // fetch('https://newsapi.org/v2/top-headlines?
-    //         q=Corona&sources=bbc-news,abc-news,ars-technica
-    //         &pageSize=100
-    //         &apiKey=c2fc6bdd3bcb4a139b303cd57af45cc2')
-    //     .then(resp => resp.json())
-    //     .then(data => console.log(data))
 
-// 5d94a4280599426498934113df289233 microsoft bing search api
-// //BigDataCloud API KEY 08f39e5268b84df2a3d602cce60a519e
-
-    const [ searchparams, searchparamsSet ] = useState(search_submitted)
-
-    const [ cards, cardsSet ] = useState(null)
-
-    const currentCoordinates = useSelector(state => state.coordinates)
-    const user_city_state = useSelector(state => state.user_location)
+    // const [ searchparams, searchparamsSet ] = useState(search_submitted)
+    // const currentCoordinates = useSelector(state => state.coordinates)
+    // const user_city_state = useSelector(state => state.user_location)
     
+    const [ cards, cardsSet ] = useState(null)
     const [ displayedNews, displayedNewsSet ] = useState(null)
 
 
     useEffect(() => {
-        // debugger
         fetchNews(search_submitted)
     }, [search_submitted])
     
-    //only implemented for top-headlinessssss
     function fetchNews(search_params) {
-        //Everything search param does not allow country but includes langauge... so .... figure it out...
         //debugger
         if (search_params !== ""){
             const api_key = 'c2fc6bdd3bcb4a139b303cd57af45cc2'
-            debugger
+            //debugger
             if (search_params.endpoint === 'top-headlines'){
                 if (search_submitted.news_source) {
                     let string_of_news_sources = search_params.news_source.join('\,')
@@ -51,20 +37,20 @@ const NewsContainer = ({search_submitted, user_location}) => {
                         .then(data => renderCards(data))
                 } else if (search_params.category !== null){
                     let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&category=${search_params.category}&pageSize=100&apiKey=${api_key}`
-                    // debugger
                     fetch(url)
                         .then(res => res.json())
                         .then(data => renderCards(data))
                 } else {
-                    let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&pageSize=100&apiKey=${api_key}`    
-                    // debugger
+                    let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&country=${search_params.country}&pageSize=100&apiKey=${api_key}`
                     fetch(url)
                         .then(res => res.json())
                         .then(data => renderCards(data))
                 }
+
+            //if the endpoint is "Everything" instead of top-headlines
             } else {
                     let url = `https://newsapi.org/v2/${search_params.endpoint}?q=${search_params.input}&language=${search_params.lang}&sortBy=${search_params.sortBy}&pageSize=100&apiKey=${api_key}`
-                    debugger
+                    //debugger
                     fetch(url)
                         .then(res => res.json())
                         .then(data => renderCards(data))

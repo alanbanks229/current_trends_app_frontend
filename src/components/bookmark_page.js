@@ -3,8 +3,6 @@ import {useSelector} from "react-redux"
 import BookmarkedNewsCards from "./BookmarkedCards.js"
 import NavBarContainer from '../containers/Navbar.js';
 
-import NewsCards from "./NewsCards.js"
-
 const BookmarkPage = (props) => {
 
     const user_bookmark_ids = useSelector(state => state.user_bookmark_ids)
@@ -20,9 +18,10 @@ const BookmarkPage = (props) => {
     }, [])
 
     function fetch_bookmarks(bookmark_ids){
-        //create custom route called /your_bookmarks in backend ... bruh i just need to pass in the user id lol
-        debugger
-        fetch('http://localhost:3001/your_bookmarks', {
+        //debugger
+
+        //fetch('http://localhost:3001/your_bookmarks')
+        fetch('https://current-trends-app-api.herokuapp.com/your_bookmarks', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({user_id: currentUser.id})
@@ -96,7 +95,7 @@ const BookmarkPage = (props) => {
                 )}
             </div>
             :
-            <div>Look like there's nothing here, bookmark some cards to see them here!</div>
+            <div>Looks like there's nothing here, bookmark some cards to see them here!</div>
             }
 
         </div>

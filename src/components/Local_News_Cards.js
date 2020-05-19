@@ -28,7 +28,8 @@ function Local_News_Card(props){
                 user_id: currentUser.id,
                 article_data: props.article
             }
-            fetch('http://localhost:3001/bookmarks', {
+            //http://localhost:3001/bookmarks
+            fetch('https://current-trends-app-api.herokuapp.com/bookmarks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -69,7 +70,8 @@ function Local_News_Card(props){
                         swal("Canceled Action", "Bookmark will remain", "info")
                         break;
                     case "Confirm":
-                        fetch(`http://localhost:3001/user_bookmarks/${bookmark_id}`, {
+                        //http://localhost:3001/user_bookmarks/${bookmark_id}
+                        fetch(`https://current-trends-app-api.herokuapp.com/user_bookmarks/${bookmark_id}`, {
                             method: 'DELETE',
                             headers: {'Content-Type': 'application/json'}
                         }).then(response => {

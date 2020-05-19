@@ -33,8 +33,8 @@ class Login extends Component {
         email: email,
         password: password
       }
-      
-      axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
+      // axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
+      axios.post('https://current-trends-app-api.herokuapp.com/login', {user}, {withCredentials: true})
       .then(response => {
         // debugger
         if (response.data.logged_in) {
@@ -54,7 +54,6 @@ class Login extends Component {
     };
 
     redirect = () => {
-          console.log("I believe when we hit redirect(), we are taken to localhost:3000/")
           this.props.history.push('/')
     }
 

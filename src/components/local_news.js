@@ -6,10 +6,9 @@ import NavBarContainer from '../containers/Navbar.js';
 
 const LocalNewsPage = (props) => {
 
-    //In news container it will receive the form submitted and from the filters applied
-    //we will render the specific news cards.
-    // 5d94a4280599426498934113df289233
-    // //BigDataCloud API KEY 08f39e5268b84df2a3d602cce60a519e
+    // In news container it will receive the form submitted and from the filters applied
+    // we will render the specific news cards.
+    // BigDataCloud API KEY 08f39e5268b84df2a3d602cce60a519e
 
         const user_city_state = useSelector(state => state.user_location)
         const [ cards, cardsSet ] = useState(null)
