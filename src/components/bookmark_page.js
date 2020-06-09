@@ -20,8 +20,8 @@ const BookmarkPage = (props) => {
     function fetch_bookmarks(bookmark_ids){
         //debugger
 
-        //fetch('http://localhost:3001/your_bookmarks')
-        fetch('https://current-trends-app-api.herokuapp.com/your_bookmarks', {
+        //fetch('http://localhost:3001/your_bookmarks')    https://current-trends-app-api.herokuapp.com/your_bookmarks
+        fetch('http://localhost:3001/your_bookmarks', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({user_id: currentUser.id})

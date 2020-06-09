@@ -70,8 +70,8 @@ function Local_News_Card(props){
                         swal("Canceled Action", "Bookmark will remain", "info")
                         break;
                     case "Confirm":
-                        //http://localhost:3001/user_bookmarks/${bookmark_id}
-                        fetch(`https://current-trends-app-api.herokuapp.com/user_bookmarks/${bookmark_id}`, {
+                        //http://localhost:3001/user_bookmarks/${bookmark_id}    https://current-trends-app-api.herokuapp.com/user_bookmarks/${bookmark_id}
+                        fetch(`http://localhost:3001/user_bookmarks/${bookmark_id}`, {
                             method: 'DELETE',
                             headers: {'Content-Type': 'application/json'}
                         }).then(response => {

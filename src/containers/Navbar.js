@@ -58,7 +58,7 @@ const NavBarContainer = (props) => {
     }
     const handleClick = () => {
       // https://current-trends-app-api.herokuapp.com/logout http://localhost:3001/logout
-        axios.delete('https://current-trends-app-api.herokuapp.com/logout', {withCredentials: false})
+        axios.delete('http://localhost:3001/logout', {withCredentials: false})
         .then(response => {
           props.props.handleLogout()
           props.props.history.push('/')
@@ -74,7 +74,7 @@ const NavBarContainer = (props) => {
       if (currentUser){
         var userId = currentUser.id
         // http://localhost:3001/users/${userId}       https://current-trends-app-api.herokuapp.com/users/${userId}
-        fetch(`https://current-trends-app-api.herokuapp.com/users/${userId}`, {
+        fetch(`http://localhost:3001/users/${userId}`, {
           method: 'PATCH',
           headers:  {
             "Content-Type": "application/json",

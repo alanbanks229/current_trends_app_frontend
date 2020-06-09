@@ -29,8 +29,8 @@ function News_Card(props){
                 user_id: currentUser.id,
                 article_data: props.article
             }
-            // http://localhost:3001/bookmarks
-            fetch('https://current-trends-app-api.herokuapp.com/bookmarks', {
+            // http://localhost:3001/bookmarks  https://current-trends-app-api.herokuapp.com/bookmarks
+            fetch('http://localhost:3001/bookmarks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -71,8 +71,8 @@ function News_Card(props){
                         swal("Canceled Action", "Bookmark will remain", "info")
                         break;
                     case "Confirm":
-                        // http://localhost:3001/user_bookmarks/${bookmark_id}
-                        fetch(`https://current-trends-app-api.herokuapp.com/user_bookmarks/${bookmark_id}`, {
+                        // http://localhost:3001/user_bookmarks/${bookmark_id}    https://current-trends-app-api.herokuapp.com/user_bookmarks/${bookmark_id}
+                        fetch(`http://localhost:3001/user_bookmarks/${bookmark_id}`, {
                             method: 'DELETE',
                             headers: {'Content-Type': 'application/json'}
                         }).then(response => {

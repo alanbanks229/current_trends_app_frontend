@@ -34,7 +34,7 @@ handleSubmit = (event) => {
       password_confirmation: password_confirmation
     }
     //axios.post('http://localhost:3001/users', {user}, {withCredentials: true})    https://current-trends-app-api.herokuapp.com/users
-    axios.post('https://current-trends-app-api.herokuapp.com/users', {user}, {withCredentials: false})
+    axios.post('http://localhost:3001/users', {user}, {withCredentials: false})
     .then(response => {
       if (response.data.status === 'created') {
         this.props.handleLogin(response.data)

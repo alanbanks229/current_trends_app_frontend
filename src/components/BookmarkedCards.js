@@ -46,8 +46,8 @@ function BookmarkedCards(props){
                     swal("Canceled action", "Bookmark will stay", "info")
                     break
                 case "Confirm":
-                    //http://localhost:3001/user_bookmarks/${props.userbookmark_id}
-                    fetch(`https://current-trends-app-api.herokuapp.com/user_bookmarks/${props.userbookmark_id}`, {
+                    //http://localhost:3001/user_bookmarks/${props.userbookmark_id}      https://current-trends-app-api.herokuapp.com/user_bookmarks/${props.userbookmark_id}
+                    fetch(`http://localhost:3001/user_bookmarks/${props.userbookmark_id}`, {
                         method: 'DELETE',
                         headers: {'Content-Type': 'application/json'}
                     }).then(response => {

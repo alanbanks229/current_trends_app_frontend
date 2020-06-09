@@ -24,8 +24,8 @@ const App = (props) => {
   useEffect(() => {
     loginStatus()
   }, [])
-  
-  const loginStatus = () => {axios.get('https://current-trends-app-api.herokuapp.com/logged_in', {withCredentials: false})
+  //https://current-trends-app-api.herokuapp.com/logged_in   
+  const loginStatus = () => {axios.get('http://localhost:3001/logged_in', {withCredentials: false})
       .then(response => {
         if (response.data.logged_in) {
           handleLogin(response)

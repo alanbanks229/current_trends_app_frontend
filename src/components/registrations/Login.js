@@ -34,7 +34,7 @@ class Login extends Component {
         password: password
       }
       // axios.post('http://localhost:3001/login', {user}, {withCredentials: true})   https://current-trends-app-api.herokuapp.com/login
-      axios.post('https://current-trends-app-api.herokuapp.com/login', {user}, {withCredentials: false})
+      axios.post('http://localhost:3001/login', {user}, {withCredentials: false})
       .then(response => {
         // debugger
         if (response.data.logged_in) {

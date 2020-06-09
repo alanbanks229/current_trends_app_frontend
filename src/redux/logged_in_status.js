@@ -18,7 +18,7 @@ export function user_logged_out_action(){
 //hacky way for now to prevent currentUser to default to null
 // I'm not even dispatching the event here how the hell is it getting here.
 export default function user_logged_reducer( value = null, action){
-    debugger
+    // debugger
     switch(action.type){
         case "LOGGED_IN":
             return action.payload

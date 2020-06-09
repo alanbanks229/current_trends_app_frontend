@@ -16,7 +16,7 @@ const LocalNewsPage = (props) => {
         const [ isFetching, isFetchingSet ] = useState(false)
 
         useEffect(() => {
-            debugger
+            // debugger
             if (user_city_state){
                 fetch_local_news(user_city_state)
             }
@@ -39,7 +39,7 @@ const LocalNewsPage = (props) => {
         const determineNumber = () => {
             let first_article = (offset * 20) + 1
             let last_article = (offset * 20) + 21
-            debugger
+            // debugger
             return `${first_article.toString()}-${last_article.toString()}`
         }
 
@@ -53,13 +53,22 @@ const LocalNewsPage = (props) => {
             // debugger
             isFetchingSet(true)
             let URL = `https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=${userLocation.city}, ${userLocation.state}&originalImg=true&count=20&offset=${offset}`
+            // debugger
                 fetch(URL, requestHeaders)
-                .then((response) => response.json())
+                .then((response) => {
+                    if (response.status == 401){
+                        throw Error(response.statusText)
+                    } else {
+                        return response.json()
+                    }
+                })
                 .then((newsJSON) => {
-                    debugger
+                    // debugger
                     cardsSet(newsJSON)
                     isFetchingSet(false)
-            })
+                }).catch((error) => {
+                    alert("API key is invalid. Make sure to provide a valid key for an active subscription.")
+                })
           }
     
         return (
