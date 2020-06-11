@@ -75,53 +75,52 @@ class Login extends Component {
     
     return (
       <>
+        <>
+          <form onSubmit={this.handleSubmit}>
+              <div className="container">
 
-      <>
-    <form onSubmit={this.handleSubmit}>
-        <div className="container">
-
-          <div className="signup_header_div">
-            <h1>Login</h1>
-            <p>Fill in this form to login to your account</p>
-            <>
-            {
-            this.state.errors ? this.handleErrors() : null
-            }
-            </>
-          </div>
-          <>
-            <hr/>
-            <label for="email"><b>Email</b></label>
-            <input
-              placeholder="username"
-              type="text"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-            <label for="password"><b>Password</b></label>
-            <input 
-              placeholder="password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <hr/>
-            <div className="div-with-submit">
-            <button placeholder="submit" type="submit" className="registerbtn">
-              Login
-            </button>
-            </div>
-            <div class="container signin">
-            <p>Don't have an account? <Link to="/signup">Sign Up!</Link></p>
-            <Link to="/about">About</Link>
-            </div>
-          </>
-        </div>
-    </form>
-    </>
-</>
+              <div className="signup_header_div">
+                  <h1>Login</h1>
+                  <p>Fill in this form to login to your account</p>
+                  <>
+                  {
+                  this.state.errors ? this.handleErrors() : null
+                  }
+                  </>
+              </div>
+                <>
+                    <hr/>
+                    <label for="email"><b>Email</b></label>
+                    <input
+                      placeholder="username"
+                      type="text"
+                      name="email"
+                      value={email}
+                      onChange={this.handleChange}
+                    />
+                    <label for="password"><b>Password</b></label>
+                    <input 
+                      placeholder="password"
+                      type="password"
+                      name="password"
+                      value={password}
+                      onChange={this.handleChange}
+                    />
+                    <hr/>
+                    <div className="div-with-submit">
+                    <button placeholder="submit" type="submit" className="registerbtn">
+                      Login
+                    </button>
+                    </div>
+                    <div class="container signin">
+                  <p>Don't have an account? <Link to="/signup">Sign Up!</Link></p>
+                  <Link to="/about">About</Link>
+                  </div>
+                </>
+              </div>
+          </form>
+        </>
+      </>
         );
     }
 }
