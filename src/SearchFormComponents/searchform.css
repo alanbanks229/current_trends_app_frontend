@@ -11,14 +11,90 @@
     margin-left: 6%;
 }
 
-.search_header{
+.SearchForm .header_content {
+    width: 100%;
+    align-self: auto;
+    margin: auto!important;
+
+}
+
+.SearchForm .header_content .search_header{
     padding-top: 5%;
+    margin-left: 3%;
     text-align: center;
 }
 
+.SearchForm .info{
+    padding-left: 1%;
+    margin-bottom: 1%;
+}
+.SearchForm .info:hover{
+    border-color: blue;
+    color: cyan;
+    cursor: pointer;
+}
+
+/* Tool Tip stuff */
+.tooltiptext {
+    animation-duration: 1.5s;
+    animation-name: expand_tool_tip;
+    width: 30%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    margin: auto;
+    position: relative;
+    display: block;
+    z-index: 1;
+  }
+
+.invisible_tooltip{
+    visibility: hidden;
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    margin: auto;
+    position: relative;
+    display: block;
+    z-index: 1;
+}
+
+  @keyframes expand_tool_tip {
+    from {
+        opacity: 0%;
+        width: 30%;
+
+    } to {
+        opacity: 100%;
+        width: 30%;
+
+    }
+}
+
+/* @keyframes contract_tool_tip {
+    from {
+        width: 50%;
+    } to {
+        width: 0%;
+    }
+} */
+
+/* End of Tool-Tip Stuff */
 
 /*  THE  SEPARATE  DIVS   */
 .everything-filters-div{
+    
     -webkit-box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
     -moz-box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
     box-shadow: 0px 4px 7px 6px rgba(110,110,110,0.8);
@@ -41,6 +117,7 @@
     float: left;
 }
 .top-headlines-filters-div-grayed{
+    
     margin-right: 4px!important;
     padding-top: 10px;
     padding-right: 10px;

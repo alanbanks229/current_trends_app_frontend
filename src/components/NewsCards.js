@@ -60,7 +60,7 @@ function News_Card(props){
                 },
                 content: (
                   <div className="flex">
-                    <img src={props.image} className="alertbox_img"/>
+                    <img alt="" src={props.image} className="alertbox_img"/>
                     <h1>Do you want to remove this bookmark?</h1>
                   </div>
                 )
@@ -108,11 +108,11 @@ function News_Card(props){
             </header>
             {props.image ? ( img_ready ? (<img src={props.image} alt={props.title} className="img-responsive"/>) 
                                         : (<div>loading 
-                                            <img src={props.image} onLoad={handleImageLoaded} style={{display: 'none'}}/>
+                                            <img alt="" src={props.image} onLoad={handleImageLoaded} style={{display: 'none'}}/>
                                           </div>)
                             ) 
                         :
-                            ((<img src={missing_img} className="article_img"/>))
+                            ((<img alt="" src={missing_img} className="article_img"/>))
             }
             <br></br>
             <div className="img_caption">

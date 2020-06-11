@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useSelector, useDispatch} from "react-redux"
 import {update_input_field_action} from "../redux/update_search.js"
 import {input_submission_action} from "../redux/search_bar_submission.js"
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ControlledForm() {
-   // const openFilter = filterOpen()
+
     const classes = useStyles();
     const currentSearch = useSelector(state => state.input_field)
     const [ inputfield, inputFieldSet ] = useState(currentSearch)
@@ -49,11 +49,11 @@ export default function ControlledForm() {
     const [ langFilter, langFilterSet ] = useState(false)
     const [ lang, langSet ] = useState('')
     const [ sortBy, sortBySet ] = useState('publishedAt')
-
+    const [ info, infoSet ] = useState(false)
 
 
     console.log("current country code is", country)
-    const currentSubmission = useSelector(state => state.submission)
+    // const currentSubmission = useSelector(state => state.submission)
     const dispatch = useDispatch()
     console.log("currentSearch is : ", currentSearch)
 
@@ -78,8 +78,16 @@ export default function ControlledForm() {
         subCategoryFilterSet(!subCategoryFilter)
     }
 
-    const updateCategory = (user_selection) => {
+    const updateInfoState = (event) => {
         // debugger
+        if (info === true){
+            infoSet(false)
+        } else {
+            infoSet(true)
+        }
+    }
+
+    const updateCategory = (user_selection) => {
         categorySet(user_selection)
     }
 
@@ -120,169 +128,195 @@ export default function ControlledForm() {
     }
         return(
             <div className="SearchForm">
-                <h1 className="search_header">Current Trends</h1>
-                <br/>
+                <div className="header_content">
+                    <h1 className="search_header">Current Trends
+                    <Icon onClick={(event) => updateInfoState(event)} size='small' name='info circle' />
+                    </h1>
+                    { info ? 
+                    <span className="tooltiptext">
+                        Clicking search on <b>DEFAULT</b> will provide <br/><br/>Top-Headlines in the United States.
+                    </span>
+                    : 
+                      <span className="invisible_tooltip">
+                          If I can see this there is a problem<br/><br/>This text should be hidden.
+                      </span> 
+                    }
+                    <br/>
+                </div>
                 <form id="search_form" onSubmit={(event) => {
                     event.preventDefault()
-                    dispatch(input_submission_action(event, {input: inputfield, endpoint: endpoint, country: country, category: category, news_source: newsSource, sortBy: sortBy, lang: lang}))}}>
-                <div className="centerSearchBarDiv">
-                    <div class="ui large icon input">
-                        <input type="text" placeholder="search..." onChange={(event) => {
-                            updateInputField(event)
-                            dispatch(update_input_field_action(event))}
-                            }/>
-                        <i className="search icon"></i>
+                    dispatch(input_submission_action(event, 
+                        {
+                        input: inputfield,
+                        endpoint: endpoint,
+                        country: country,
+                        category: category,
+                        news_source: newsSource,
+                        sortBy: sortBy,
+                        lang: lang
+                        }
+                    ))
+                }}>
+                {/* The Following is inside the Form Component */}
+                    <div className="centerSearchBarDiv">
+                        <div class="ui large icon input">
+                            <input type="text" placeholder="search..." onChange={(event) => {
+                                updateInputField(event)
+                                dispatch(update_input_field_action(event))}
+                                }/>
+                            <i className="search icon"></i>
+                        </div>
+                        <input type="submit" value="Search"/>
                     </div>
-                    <input type="submit" value="Search"/>
-                </div>
-                <div className={classes.root}>
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                            <Typography className={classes.heading}>
-                                <Icon color='black' name='filter' />
-                                <span class="text">Filters</span>
-                            </Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Typography>
-                            <FormControl component="fieldset">
-                                <RadioGroup row aria-label="position" name="endpoint" defaultValue={endpoint}>
-                                    <div className="direct_container_top_headlines_filters">
-                                    <FormControlLabel value="top-headlines" control={<Radio color="primary" />} label="Top Headlines" onClick={(e) => updateEndPoint(e)}/>
-                                    </div>
+                    <div className={classes.root}>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                                <Typography className={classes.heading}>
+                                    <Icon color='black' name='filter' />
+                                    <span class="text">Filters</span>
+                                </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Typography>
+                                <FormControl component="fieldset">
+                                    <RadioGroup row aria-label="position" name="endpoint" defaultValue={endpoint}>
+                                        <div className="direct_container_top_headlines_filters">
+                                        <FormControlLabel value="top-headlines" control={<Radio color="primary" />} label="Top Headlines" onClick={(e) => updateEndPoint(e)}/>
+                                        </div>
 
-                                    <div className="direct_container_everything_filters">
-                                    <FormControlLabel value="everything" control={<Radio color="primary" />} label="Everything" onClick={(e) => updateEndPoint(e)} />
-                                    </div>
-                                </RadioGroup>
-                            </FormControl>
-                            <br></br>
-                            <br/>
+                                        <div className="direct_container_everything_filters">
+                                        <FormControlLabel value="everything" control={<Radio color="primary" />} label="Everything" onClick={(e) => updateEndPoint(e)} />
+                                        </div>
+                                    </RadioGroup>
+                                </FormControl>
+                                <br></br>
+                                <br/>
 
-                            <div className="outer_div_containing_both_filter_properties">
-                            {endpoint === 'top-headlines' ? 
-                            (<>
-                            {/* <ul className="filter-settings-inline">
-                                <li className="everything-filters-li-grayed"> */}
-                                <div className="everything-filters-div-grayed">
-                                        <label>
-                                            <b>Sort by</b> (newest, relevancy, popularity)<br/>
-                                            <FormControl component="fieldset">        
-                                                <RadioGroup row aria-label="position" name="sort-by" defaultValue={sortBy}>
-                                                    <FormControlLabel value="publishedAt" control={<Radio color="secondary" />} label="Newest Articles" onClick={(e) => updateSortBy(e)}/>
-                                                    <FormControlLabel value="relevancy" control={<Radio color="secondary" />} label="Relevancy" onClick={(e) => updateSortBy(e)} />
-                                                    <FormControlLabel value="popularity" control={<Radio color="secondary" />} label="Popularity" onClick={(e) => updateSortBy(e)} />
-                                                </RadioGroup>
-                                            </FormControl>
-                                        </label>
-                                        <br/>
-                                        <br/>
-                                            <b>Filter by language</b>
-                                            <input type="checkbox" id="lang_btn" onClick={(event) => updateLangFilter(event)}/> 
-                                            {langFilter ? 
-                                            (<><br/><SelectLanguage langSet={updateLang}/></>) :
-                                             (<br/>)}
-                                            <br />
-                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (all languages)</em><br/><br/>
-                                </div>
-
-
-                                    <div className="top-headlines-filters-div">
-                                        <label>
-                                            <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
-                                            <br/>
-                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (United States)</em><br/>
-                                            
-                                        </label>
-                                        <br/>
-                                        <label>
-                                            <b>Filter by sub-category</b> (optional)
-                                            {newsSourceChecked ? 
-                                            (<input type="checkbox" id="subcategoryBtn" disabled/>): 
-                                            (<input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>)}
-                                            
-                                        </label>
-                                        <br></br>
-                                        {subCategoryFilter ? 
-                                        (<SelectSubcategory updateCateg={updateCategory}/>):
-                                         (null)}
-                                        <br/>
-                                        <label>
-                                            <b>Filter by news-source</b> (optional)
-                                            {subCategoryFilter ? (<input type="checkbox" className="news_source_btn" disabled />): (<input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSourceFilter(event)}/>)}
-                                        </label>
-                                        {newsSourceFilter ? (<SelectNewsSources updateNewsSource={updateNewsSource}/>): (null)}
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                    </div>
-                                {/* // </li> */}
-                                {/* // </ul> */}
-                                </>
-                                ) 
-                                : 
-                                (
-                                <>
+                                <div className="outer_div_containing_both_filter_properties">
+                                {endpoint === 'top-headlines' ? 
+                                (<>
                                 {/* <ul className="filter-settings-inline">
-                                <li className="everything-filters-li-grayed"> */}
-                                <div className="everything-filters-div">
-                                        <label>
-                                            <b>Sort by</b> (newest, relevancy, popularity)<br/>
-                                            <FormControl component="fieldset">        
-                                                <RadioGroup row aria-label="position" name="sort-by" defaultValue={sortBy}>
-                                                    <FormControlLabel value="publishedAt" control={<Radio color="secondary" />} label="Newest Articles" onClick={(e) => updateSortBy(e)}/>
-                                                    <FormControlLabel value="relevancy" control={<Radio color="secondary" />} label="Relevancy" onClick={(e) => updateSortBy(e)} />
-                                                    <FormControlLabel value="popularity" control={<Radio color="secondary" />} label="Popularity" onClick={(e) => updateSortBy(e)} />
-                                                </RadioGroup>
-                                            </FormControl>
-                                        </label>
-                                        <br/>
-                                        <br/>
-                                        
-                                            <b>Filter by language</b>
-                                            <input type="checkbox" id="lang_btn" onClick={(event) => updateLangFilter(event)}/>
-                                            {langFilter ? (<><br/><SelectLanguage langSet={updateLang}/></>) : (<br/>)}
-                                            <br />
-                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (all languages)</em><br/><br/>
-                                        
-                                </div>
-                                {/* </li>
-                                <li className="top-headlines-filters-li-grayed"> */}
-                                    <div className="top-headlines-filters-div-grayed">
-                                        <label>
-                                            <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
+                                    <li className="everything-filters-li-grayed"> */}
+                                    <div className="everything-filters-div-grayed">
+                                            <label>
+                                                <b>Sort by</b> (newest, relevancy, popularity)<br/>
+                                                <FormControl component="fieldset">        
+                                                    <RadioGroup row aria-label="position" name="sort-by" defaultValue={sortBy}>
+                                                        <FormControlLabel value="publishedAt" control={<Radio color="secondary" />} label="Newest Articles" onClick={(e) => updateSortBy(e)}/>
+                                                        <FormControlLabel value="relevancy" control={<Radio color="secondary" />} label="Relevancy" onClick={(e) => updateSortBy(e)} />
+                                                        <FormControlLabel value="popularity" control={<Radio color="secondary" />} label="Popularity" onClick={(e) => updateSortBy(e)} />
+                                                    </RadioGroup>
+                                                </FormControl>
+                                            </label>
                                             <br/>
-                                            <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (United States)</em><br/>
+                                            <br/>
+                                                <b>Filter by language</b>
+                                                <input type="checkbox" id="lang_btn" onClick={(event) => updateLangFilter(event)}/> 
+                                                {langFilter ? 
+                                                (<><br/><SelectLanguage langSet={updateLang}/></>) :
+                                                (<br/>)}
+                                                <br />
+                                                <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (all languages)</em><br/><br/>
+                                    </div>
+
+
+                                        <div className="top-headlines-filters-div">
+                                            <label>
+                                                <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
+                                                <br/>
+                                                <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (United States)</em><br/>
+                                                
+                                            </label>
+                                            <br/>
+                                            <label>
+                                                <b>Filter by sub-category</b> (optional)
+                                                {newsSourceChecked ? 
+                                                (<input type="checkbox" id="subcategoryBtn" disabled/>): 
+                                                (<input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>)}
+                                                
+                                            </label>
+                                            <br></br>
+                                            {subCategoryFilter ? 
+                                            (<SelectSubcategory updateCateg={updateCategory}/>):
+                                            (null)}
+                                            <br/>
+                                            <label>
+                                                <b>Filter by news-source</b> (optional)
+                                                {subCategoryFilter ? (<input type="checkbox" className="news_source_btn" disabled />): (<input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSourceFilter(event)}/>)}
+                                            </label>
+                                            {newsSourceFilter ? (<SelectNewsSources updateNewsSource={updateNewsSource}/>): (null)}
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        </div>
+                                    {/* // </li> */}
+                                    {/* // </ul> */}
+                                    </>
+                                    ) 
+                                    : 
+                                    (
+                                    <>
+                                    {/* <ul className="filter-settings-inline">
+                                    <li className="everything-filters-li-grayed"> */}
+                                    <div className="everything-filters-div">
+                                            <label>
+                                                <b>Sort by</b> (newest, relevancy, popularity)<br/>
+                                                <FormControl component="fieldset">        
+                                                    <RadioGroup row aria-label="position" name="sort-by" defaultValue={sortBy}>
+                                                        <FormControlLabel value="publishedAt" control={<Radio color="secondary" />} label="Newest Articles" onClick={(e) => updateSortBy(e)}/>
+                                                        <FormControlLabel value="relevancy" control={<Radio color="secondary" />} label="Relevancy" onClick={(e) => updateSortBy(e)} />
+                                                        <FormControlLabel value="popularity" control={<Radio color="secondary" />} label="Popularity" onClick={(e) => updateSortBy(e)} />
+                                                    </RadioGroup>
+                                                </FormControl>
+                                            </label>
+                                            <br/>
+                                            <br/>
                                             
-                                        </label>
-                                        <br/>
-                                        <label>
-                                            <b>Filter by sub-category</b> (optional)
-                                            {newsSourceChecked ? (<input type="checkbox" id="subcategoryBtn" disabled/>): (<input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>)}
+                                                <b>Filter by language</b>
+                                                <input type="checkbox" id="lang_btn" onClick={(event) => updateLangFilter(event)}/>
+                                                {langFilter ? (<><br/><SelectLanguage langSet={updateLang}/></>) : (<br/>)}
+                                                <br />
+                                                <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (all languages)</em><br/><br/>
                                             
-                                        </label>
-                                        <br/>
-                                        {subCategoryFilter ? (<SelectSubcategory updateCateg={updateCategory}/>): (null)}
-                                        <br/>
-                                        <label>
-                                            <b>Filter by news-source</b> (optional)
-                                            {subCategoryFilter ? (<input type="checkbox" className="news_source_btn" disabled />): (<input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSourceFilter(event)}/>)}
-                                        </label>
-                                        {newsSourceFilter ? (<SelectNewsSources updateNewsSource={updateNewsSource}/>): (null)}
-                                        <br/>
-                                        <br/>
                                     </div>
                                     {/* </li>
-                                </ul> */}
-                                </>
-                                )
-                            }
-                            </div>
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                </div>
-            </form>
+                                    <li className="top-headlines-filters-li-grayed"> */}
+                                        <div className="top-headlines-filters-div-grayed">
+                                            <label>
+                                                <b>Search News By Country:</b> {newsSourceChecked ? (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) : (<SelectCountry newsChecked={newsSourceChecked} countrySet={countrySet}/>) }
+                                                <br/>
+                                                <em style={{fontSize: "12px", display: 'inline-block', marginLeft: '2%'}}>Default: (United States)</em><br/>
+                                                
+                                            </label>
+                                            <br/>
+                                            <label>
+                                                <b>Filter by sub-category</b> (optional)
+                                                {newsSourceChecked ? (<input type="checkbox" id="subcategoryBtn" disabled/>): (<input type="checkbox" id="subcategoryBtn" onChange={(event) => updateSubCategFilter(event)}/>)}
+                                                
+                                            </label>
+                                            <br/>
+                                            {subCategoryFilter ? (<SelectSubcategory updateCateg={updateCategory}/>): (null)}
+                                            <br/>
+                                            <label>
+                                                <b>Filter by news-source</b> (optional)
+                                                {subCategoryFilter ? (<input type="checkbox" className="news_source_btn" disabled />): (<input type="checkbox" className="news_source_btn" onChange={(event) => updateNewsSourceFilter(event)}/>)}
+                                            </label>
+                                            {newsSourceFilter ? (<SelectNewsSources updateNewsSource={updateNewsSource}/>): (null)}
+                                            <br/>
+                                            <br/>
+                                        </div>
+                                        {/* </li>
+                                    </ul> */}
+                                    </>
+                                    )
+                                }
+                                </div>
+                                </Typography>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                    </div>
+                {/* End of Content inside Form Componenet */}
+                </form>
             </div>
         )
     }

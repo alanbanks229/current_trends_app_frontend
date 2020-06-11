@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import NewsContainer from "../containers/NewsContainer.js"
 import ControlledForm from "../SearchFormComponents"
-import {useSelector, useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 import NavBarContainer from '../containers/Navbar.js';
 
 

@@ -43,8 +43,11 @@ const LocalNewsPage = (props) => {
             return `${first_article.toString()}-${last_article.toString()}`
         }
 
+        // Keys for umgc email account.
+        // Key 1: bbec7ca9d8b640108356095ec9413fec
+        // Key 2: dff2685f358840e3a1bb798fcecd0a95
         const fetch_local_news = (userLocation) => {
-            const api = '5d94a4280599426498934113df289233';
+            const api = 'bbec7ca9d8b640108356095ec9413fec';
             const requestHeaders = {
                 headers: {
                     'Ocp-Apim-Subscription-Key': api,
@@ -56,7 +59,7 @@ const LocalNewsPage = (props) => {
             // debugger
                 fetch(URL, requestHeaders)
                 .then((response) => {
-                    if (response.status == 401){
+                    if (response.status === 401){
                         throw Error(response.statusText)
                     } else {
                         return response.json()

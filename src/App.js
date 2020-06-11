@@ -40,15 +40,22 @@ const App = (props) => {
   }
 
   const handleLogin = (data) => {
+    debugger
     if (data.status === "created"){
       isLoggedInSet(true)
       userSet(data.user)
       dispatch(user_logged_in_action(data.user))
+      if (data.bookmarks){
+        dispatch(retrieve_user_bookmarks(data.bookmarks))
+      }
     } else {
       console.log("handling login")
       isLoggedInSet(true)
       userSet(data.data.user)
       dispatch(user_logged_in_action(data.data.user))
+      if (data.data.bookmarks){
+        dispatch(retrieve_user_bookmarks(data.data.bookmarks))
+      }
     }
   }
 

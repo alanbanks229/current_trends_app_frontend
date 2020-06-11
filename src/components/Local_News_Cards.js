@@ -28,8 +28,8 @@ function Local_News_Card(props){
                 user_id: currentUser.id,
                 article_data: props.article
             }
-            //http://localhost:3001/bookmarks
-            fetch('https://current-trends-app-api.herokuapp.com/bookmarks', {
+            //http://localhost:3001/bookmarks  https://current-trends-app-api.herokuapp.com/bookmarks
+            fetch('http://localhost:3001/bookmarks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -59,7 +59,7 @@ function Local_News_Card(props){
                 },
                 content: (
                   <div className="flex">
-                    <img src={props.article_img} className="alertbox_img"/>
+                    <img alt="" src={props.article_img} className="alertbox_img"/>
                     <h1>Do you want to remove this bookmark?</h1>
                   </div>
                 )
@@ -102,14 +102,14 @@ function Local_News_Card(props){
     return(
         <div className='NewsCard' id={props.id}>
             <header className="card-header">
-                <img src={props.source_provider_img_url} className="source_provider_img"/>
+                <img alt="" src={props.source_provider_img_url} className="source_provider_img"/>
                 <h4 className="card-header-title">{props.source_provider_name}</h4>
                 <a href={props.article_url} target="_blank" rel="noopener noreferrer">Link Source</a>
             </header>
             {props.article_img ? 
-                (<img src={props.article_img} onLoad={handleImageLoaded} style={{display: 'none'}}/>) : <img src={missing_img} className="article_img"/>}
+                (<img alt="" src={props.article_img} onLoad={handleImageLoaded} style={{display: 'none'}}/>) : <img alt="" src={missing_img} className="article_img"/>}
                 {img_ready ? 
-                    (<img src={props.article_img} className="article_img"/>)
+                    (<img alt="" src={props.article_img} className="article_img"/>)
                     :
                     (<div>loading</div>)
                 }

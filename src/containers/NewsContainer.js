@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {useSelector, useDispatch} from "react-redux"
 import NewsCards from "../components/NewsCards.js"
 
 const NewsContainer = ({search_submitted, user_location}) => {
@@ -16,7 +15,7 @@ const NewsContainer = ({search_submitted, user_location}) => {
     // const user_city_state = useSelector(state => state.user_location)
     
     const [ cards, cardsSet ] = useState(null)
-    const [ displayedNews, displayedNewsSet ] = useState(null)
+    // const [ displayedNews, displayedNewsSet ] = useState(null)
 
 
     useEffect(() => {
@@ -66,7 +65,7 @@ const NewsContainer = ({search_submitted, user_location}) => {
         if (data){
             if (data.status === 'ok'){
                 cardsSet(data)
-                displayedNewsSet(data.articles)
+                // displayedNewsSet(data.articles)
             } else {
                 return null
             }

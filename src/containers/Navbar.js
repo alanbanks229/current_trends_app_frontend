@@ -16,11 +16,11 @@ import swal from '@sweetalert/with-react';
 const NavBarContainer = (props) => {
 
     const [ user_location_acquired, user_location_acquiredSet ] = useState(false)
-    const [ lat, latSet ] = useState('')
-    const [ long, longSet ] = useState('')
+    // const [ lat, latSet ] = useState('')
+    // const [ long, longSet ] = useState('')
     const [ loading, loadingSet ] = useState(false)
 
-    const currentSubmission = useSelector(state => state.submitted)
+    // const currentSubmission = useSelector(state => state.submitted)
     const userLocation = useSelector(state => state.user_location)
     const currentUser = useSelector(state => state.current_user)
     const [ displayWeather, displayWeatherSet ] = useState(false)
@@ -116,8 +116,8 @@ const NavBarContainer = (props) => {
               loadingSet(true)
               const success = (position) => {
                   var coordinates = position.coords;
-                  latSet(coordinates.latitude)
-                  longSet(coordinates.longitude)
+                  // latSet(coordinates.latitude)
+                  // longSet(coordinates.longitude)
                   dispatch(received_location(event, coordinates))
                   fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&localityLanguage=en`)
                     .then(response => response.json())
@@ -161,7 +161,7 @@ const NavBarContainer = (props) => {
               <Link to='/about'> <Button size='large'>About</Button> </Link>
             </li>
             <li className="logo-li">
-              <Link to='/'> <button><img src={logo_img} className="logo"/></button></Link>
+              <Link to='/'> <button><img alt="" src={logo_img} className="logo"/></button></Link>
             </li></>) 
             
             : 
@@ -180,7 +180,7 @@ const NavBarContainer = (props) => {
               <Link to='/about'> <Button size='large'>About</Button> </Link>
             </li>
             <li className="logo-li">
-              <Link to='/'> <button><img src={logo_img} className="logo"/></button></Link>
+              <Link to='/'> <button><img alt="" src={logo_img} className="logo"/></button></Link>
             </li>
             
             </>) }

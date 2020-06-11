@@ -26,9 +26,4 @@ name of the action method.
 
 after that we can do store.dispatch( name_of_action_imported() )
 
-import store from "./redux"
-import {changeCount} from "./redux/count"
-import {addFavoriteThing, removeFavoriteThing} from "./redux/favoriteThings"
-import {setYouTubeTitle, incrementViewCount, upvoteVideo, downvoteVideo} from "./redux/youTubeVideo"
-
 */

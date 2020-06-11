@@ -56,7 +56,7 @@ const newsOptions = [
     { key: 'talksport', value: 'talksport', text: 'TalkSport'},
     { key: 'techcrunch', value: 'techcrunch', text: 'TechCrunch'},
     { key: 'techradar', value: 'techradar', text: 'TechRadar'},
-    { key: 'the-american-conservative', value: 'the-american-conservative', value: 'The American Conservative'},
+    { key: 'the-american-conservative', value: 'the-american-conservative', text: 'The American Conservative'},
     { key: 'the-hill', value: 'the-hill', text:'The Hill'},
     { key: 'the-hindu', value: 'the-hindu', text: 'The Hindu'},
     { key: 'the-huffington-post', value: 'the-huffington-post', text: 'The Huffington Post'},

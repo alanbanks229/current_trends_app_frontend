@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useSelector, useDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 import './LocalNewsContainer.css'
 import missing_img from './no-image-available-grid.png';
 import {remove_bookmark_action} from '../redux/bookmarks.js'
@@ -12,9 +12,7 @@ import moment from 'moment';
 
 function BookmarkedCards(props){
 
-
     const [ img_ready, img_readySet ] = useState(false)
-    const currentUser = useSelector(state => state.current_user)
     const dispatch = useDispatch()
     const handleImageLoaded = () => {
         img_readySet(true)
@@ -33,7 +31,7 @@ function BookmarkedCards(props){
             },
             content: (
               <div className="flex">
-                <img src={props.image} className="alertbox_img"/>
+                <img src={props.image} className="alertbox_img" alt=""/>
                 <h1>This bookmark will be deleted permanently!</h1>
                 <p>Are you sure you want to proceed?</p>
               </div>
@@ -79,17 +77,17 @@ function BookmarkedCards(props){
             <div className='NewsCard' id={props.id}>
                 <header className="card-header">
                     
-                     { has_src_img ? (<img src={props.source_provider_img_url} className="source_provider_img"/>) : (null) }
+                     { has_src_img ? (<img alt="" src={props.source_provider_img_url} className="source_provider_img"/>) : (null) }
                     <h4 className="card-header-title">{props.source}</h4>
                     <a href={props.url} target="_blank" rel="noopener noreferrer">Link Source</a>
                 </header>
                 {props.image ? 
-                    (<img src={props.image} onLoad={handleImageLoaded} style={{display: 'none'}}/>)
+                    (<img alt="" src={props.image} onLoad={handleImageLoaded} style={{display: 'none'}}/>)
                     :
-                    (<img src={missing_img} className="article_img"/>)
+                    (<img alt="" src={missing_img} className="article_img"/>)
                 }
                 {img_ready ? 
-                    (<img src={props.image} className="article_img"/>)
+                    (<img alt="" src={props.image} className="article_img"/>)
                     :
                     (<div>loading</div>)
                 }

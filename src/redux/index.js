@@ -24,11 +24,10 @@ const rootReducer = combineReducers({
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk)
-
+    // applyMiddleware(thunk)
     // Need to comment out the below so others can see the app in deployment, since everyone does not have redux dev tools extension
-    // applyMiddleware(thunk),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

@@ -36,7 +36,7 @@ class Login extends Component {
       // axios.post('http://localhost:3001/login', {user}, {withCredentials: true})   https://current-trends-app-api.herokuapp.com/login
       axios.post('http://localhost:3001/login', {user}, {withCredentials: false})
       .then(response => {
-        // debugger
+        debugger
         if (response.data.logged_in) {
           let hash = {}
           hash['data'] = response.data

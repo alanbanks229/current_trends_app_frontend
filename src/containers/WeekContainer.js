@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 import DayCard from './WeatherCard.js'
 import DegreeToggle from './DegreeToggle.js'
 import './weekcontainer.css'
@@ -8,7 +8,7 @@ import './weekcontainer.css'
 const WeekContainer = ({hide}) => {
     
 
-    const [ fullData, fullDataSet ] = useState([])
+    // const [ fullData, fullDataSet ] = useState([])
     const [ dailyData, dailyDataSet ] = useState([])
     const [ degreeType, degreeTypeSet ] = useState("fahrenheit")
     const user = useSelector(state => state.user_location)
@@ -23,9 +23,9 @@ const WeekContainer = ({hide}) => {
         .then(data => {
           const DailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
           debugger
-          fullDataSet(data.list)
+          // fullDataSet(data.list)
           dailyDataSet(DailyData)
-        })}},[user])
+        })}},[user, lat, long])
 
     const updateForecastDegree = event => {
         degreeTypeSet(event.target.value)

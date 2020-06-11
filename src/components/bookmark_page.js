@@ -3,6 +3,7 @@ import {useSelector} from "react-redux"
 import BookmarkedNewsCards from "./BookmarkedCards.js"
 import NavBarContainer from '../containers/Navbar.js';
 
+
 const BookmarkPage = (props) => {
 
     const user_bookmark_ids = useSelector(state => state.user_bookmark_ids)
@@ -11,11 +12,10 @@ const BookmarkPage = (props) => {
 
 
     useEffect(() => {
-        debugger
         if (user_bookmark_ids){
             fetch_bookmarks(user_bookmark_ids)
         }
-    }, [])
+    }, [user_bookmark_ids])
 
     function fetch_bookmarks(bookmark_ids){
         //debugger
