@@ -15,7 +15,7 @@ const BookmarkPage = (props) => {
         if (user_bookmark_ids){
             fetch_bookmarks(user_bookmark_ids)
         }
-    }, [user_bookmark_ids])
+    }, [])
 
     function fetch_bookmarks(bookmark_ids){
         //debugger
@@ -50,7 +50,7 @@ const BookmarkPage = (props) => {
             {cards ?
             <div className="total_num_bookmarks">
                 <h3>Your Bookmarks</h3>
-                <h3 className="numberResults">rendered ({cards.length} news cards)</h3>
+                {/* <h3 className="numberResults">rendered ({cards.length} news cards)</h3> */}
             </div>
             :
             null}
