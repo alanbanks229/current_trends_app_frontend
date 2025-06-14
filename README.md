@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## Current Trends (Frontend) - ARCHIVED
+
+---
+
+This project is an archived Capstone project for the FlatIron School (May 2020). It is no longer actively maintained or updated.
+
+---
 
 ## Available Scripts
 
